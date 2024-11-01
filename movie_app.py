@@ -177,7 +177,7 @@ class MovieApp:
         then run the 'returner' function.
         :return:
         """
-        movies = self._storage.list_movie()
+        movies = self._storage.list_movies()
         print(f"\nThere are {len(movies.keys())} movies currently in the RateFlix library.")
         for movie, details in movies.items():
             print(Fore.CYAN + movie)
@@ -191,7 +191,7 @@ class MovieApp:
         using try, except, if and else statements to get as much error handling as possible.
         :return: returning to our dictionary. Key - String and Value - Integer
         """
-        movies = self._storage.list_movie()
+        movies = self._storage.list_movies()
         try:
             movie_to_add = input(Fore.LIGHTGREEN_EX + "What Movie would you like to add to the RateFlix library?\n>>> ")
             if not movie_to_add:
@@ -210,7 +210,7 @@ class MovieApp:
                     return
 
                 elif 0 <= movie_rating <= 10:
-                    movie_data.add_movies(self._storage, movie_to_add, movie_rating, movie_year)
+                    self._storage.add_movie(movie_to_add, movie_rating, movie_year)
                     print(
                         f"You successfully added {Fore.YELLOW}{movie_to_add}{Fore.RESET}.\nReleased in {Fore.YELLOW}{movie_year}{Fore.RESET} and has a rating of {Fore.YELLOW}{movie_rating}{Fore.RESET}!")
                 else:
@@ -234,11 +234,11 @@ class MovieApp:
         Otherwise the function follows through with the task and deletes the chosen item from the dictionary.
         :return: Formatted Print statement.
         """
-        movies = self._storage.list_movie()
+        movies = self._storage.list_movies()
         movie_to_delete = input(Fore.LIGHTGREEN_EX + "Enter the movie you would like to delete: \n >>> ")
         try:
             if movie_to_delete in movies:
-                movie_data.delete_movie(self._storage, movie_to_delete)
+                self._storage.delete_movie(movie_to_delete)
                 print(f"{Fore.YELLOW}{movie_to_delete}{Fore.RESET} was deleted from the RateFlix library.")
             else:
                 print(f"{Fore.YELLOW}{movie_to_delete}{Fore.RESET} is not in the RateFlix library.")
@@ -253,7 +253,7 @@ class MovieApp:
         The user is prompted to provide the movie title and a new rating.
         :return: F-Strings
         """
-        movies = self._storage.list_movie()
+        movies = self._storage.list_movies()
 
         update_movie_name = input(
             Fore.LIGHTGREEN_EX + "Which movie would you like to update in the RateFlix library? \n >>> ")
@@ -262,7 +262,7 @@ class MovieApp:
                 rating_to_give = float(
                     input(Fore.LIGHTGREEN_EX + "What's the new rating you would like to give the movie? \n >>> "))
                 if 0 <= rating_to_give <= 10:
-                    movie_data.update_movie(self._storage, update_movie_name, rating_to_give)
+                    self._storage.update_movie(update_movie_name, rating_to_give)
                     print(
                         f"{Fore.YELLOW}{update_movie_name}{Fore.RESET} updated in RateFlix library with a rating of: {Fore.YELLOW}{rating_to_give}")
                 else:
@@ -280,7 +280,7 @@ class MovieApp:
         Access the movies.json file to make the required calculations to provide the statistics needed for our print statements
         :return: (F-string) print statistics = Average and Mean plus the Best and Worst movies
         """
-        movies = self._storage.list_movie()
+        movies = self._storage.list_movies()
 
         # calculate average
         ratings = [movie["rating"] for movie in movies.values()]
@@ -302,16 +302,20 @@ class MovieApp:
         print(f"The Median rating is: {Fore.YELLOW}{median:.2f}")
 
         # find highest and lowest rating
-        highest_rated_movie = max(movies, key=lambda title: movies[title]["rating"])
-        lowest_rated_movie = min(movies, key=lambda title: movies[title]["rating"])
+        ratings = [movies[title]["rating"] for title in movies]
+        highest_rating = max(ratings)
+        lowest_rating = min(ratings)
+        highest_rated_movies = [title for title in movies if movies[title]["rating"] == highest_rating]
+        lowest_rated_movies = [title for title in movies if movies[title]["rating"] == lowest_rating]
 
-        highest_rating = movies[highest_rated_movie]["rating"]
-        lowest_rating = movies[lowest_rated_movie]["rating"]
+        print("Highest Rated Movies:")
+        for movie in highest_rated_movies:
+            print(f"\t{Fore.YELLOW}{movie}{Fore.RESET} - Rating: {Fore.YELLOW}{highest_rating}")
 
-        print(
-            f"The best movie currently in the RateFlix library is: {Fore.YELLOW}{highest_rated_movie}{Fore.RESET} with a rating of {Fore.YELLOW}{highest_rating}")
-        print(
-            f"The worst movie currently in the RateFlix library is: {Fore.YELLOW}{lowest_rated_movie}{Fore.RESET} with a rating of {Fore.YELLOW}{lowest_rating}")
+        print("\nLowest Rated Movies:")
+        for movie in lowest_rated_movies:
+            print(f"\t{Fore.YELLOW}{movie}{Fore.RESET} - Rating: {Fore.YELLOW}{lowest_rating}")
+
         self.returner_func()
 
     def random_movie(self):
@@ -319,7 +323,7 @@ class MovieApp:
         print a random movie from the dictionary and then call returner function
         :return: print statement
         """
-        movies = self._storage.list_movie()
+        movies = self._storage.list_movies()
         the_random_movie, val = random.choice(list(movies.items()))
         print(
             f"Random movie is: {Fore.YELLOW}{the_random_movie}{Fore.RESET}, released in {Fore.YELLOW}{val["year"]}{Fore.RESET} with a rating of {Fore.YELLOW}{val["rating"]}")
@@ -332,7 +336,7 @@ class MovieApp:
          lastly move to the Levenshtein distance to pick up any other possible matches.
         :return: a Formatted string with the title and rating taken from the movies' dictionary.
         """
-        movies = self._storage.list_movie()
+        movies = self._storage.list_movies()
         search_item = input(Fore.LIGHTGREEN_EX + "Please type what movie your searching for? \n >>> ").strip().lower()
         lower_movies = {title.lower(): title for title in movies.keys()}
 
@@ -379,7 +383,7 @@ class MovieApp:
         reverse to make sure it starts with the highest rated movie to the lowest
         :return: Formatted print statement
         """
-        movies = self._storage.list_movie()
+        movies = self._storage.list_movies()
         sorted_movies = dict(sorted(movies.items(), key=lambda item: item[1]["rating"], reverse=True))
 
         print(Fore.CYAN + "Movies sorted by rating:")
@@ -394,7 +398,7 @@ class MovieApp:
         Then ask the user under what name they would like the histogram to be saved under.
         :return: saved Histogram .png file
         """
-        movies = self._storage.list_movie()
+        movies = self._storage.list_movies()
         movie_ratings = [val["rating"] for val in movies.values()]
 
         plt.hist(movie_ratings, bins=5, color='blue', edgecolor='black')
@@ -429,7 +433,7 @@ class MovieApp:
         if "N" earliest to latest.
         :return: F-String of the movies
         """
-        movies = self._storage.list_movie()
+        movies = self._storage.list_movies()
         while True:
             user_input = input(
                 Fore.LIGHTGREEN_EX + "Would you like not to see the movies from latest movies first? Y/N\n>>> ").upper()
@@ -456,7 +460,7 @@ class MovieApp:
         If any input is left blank, it is considered as no filter for that criterion.
         It also handles invalid input types.
         """
-        movies = self._storage.list_movie()
+        movies = self._storage.list_movies()
 
         def validate_input(prompt, cast_type):
             """

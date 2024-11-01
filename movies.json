@@ -7,10 +7,6 @@
         "rating": 8.8,
         "year": 1994
     },
-    "The Room": {
-        "rating": 3.6,
-        "year": 2003
-    },
     "The Godfather": {
         "rating": 9.2,
         "year": 1972
@@ -58,5 +54,17 @@
     "Thor": {
         "rating": 8.8,
         "year": 2009
+    },
+    "The Penguin": {
+        "rating": 9.5,
+        "year": 2022
+    },
+    "The Joker": {
+        "rating": 9.0,
+        "year": 2020
+    },
+    "Murder Mindfully": {
+        "rating": 9.5,
+        "year": 2024
     }
 }
