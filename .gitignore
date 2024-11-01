@@ -1,0 +1,66 @@
+# personal
+old_app
+
+# Template
+
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Environment variables
+.env
+*.env
+
+# macOS files
+.DS_Store
+
+# Python-specific files
+*.pyd
+*.pdb
+*.so
+*.egg-info/
+*.egg
+*.whl
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.out
+*.cache/
+*.coverage
+*.pytest_cache/
+
+# IDE-specific files
+# VS Code
+.vscode/
+# PyCharm
+.idea/
+# Other IDEs may have similar directories, which you should add if applicable
+
+# Data files (if they are generated or temporary)
+data/*.json
+data/*.csv
+*.db
+
+# Build and distribution directories
+build/
+dist/
+*.egg-info/
+__pycache__/
+MANIFEST
+
+# Package manager lock files (optional, if you don’t want to track dependencies)
+poetry.lock
+Pipfile.lock
+yarn.lock
+package-lock.json
