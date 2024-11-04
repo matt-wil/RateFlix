@@ -3,36 +3,38 @@ from storage_json import StorageJson
 from storage_csv import StorageCSV
 
 
-# initialize storage and app
-storage_json = StorageJson()
-app1 = MovieApp(storage_json)
-storage_csv = StorageCSV()
-app = MovieApp(storage_csv)
+class MovieApplicationRun:
+    def __init__(self, storage_type="json"):
+        if storage_type == "csv":
+            self.storage = StorageCSV()
+        else:
+            self.storage = StorageJson()
+        self.app = MovieApp(self.storage)
+        # Initialize a dispatcher dictionary
+        self.menu_options = {
+            0: self.app.exit_program,
+            1: self.app.list_movies,
+            2: self.app.add_movie,
+            3: self.app.delete_movie,
+            4: self.app.update_movie,
+            5: self.app.stats,
+            6: self.app.random_movie,
+            7: self.app.search_movie,
+            8: self.app.movies_sorted_by_rating,
+            9: self.app.create_histogram_and_save,
+            10: self.app.movies_sorted_by_chronological_order,
+            11: self.app.filter_movies
+        }
 
-
-def main():
-    # Initialize a dispatcher dictionary
-    menu_options = {
-        0: app.exit_program,
-        1: app.list_movies,
-        2: app.add_movie,
-        3: app.delete_movie,
-        4: app.update_movie,
-        5: app.stats,
-        6: app.random_movie,
-        7: app.search_movie,
-        8: app.movies_sorted_by_rating,
-        9: app.create_histogram_and_save,
-        10: app.movies_sorted_by_chronological_order,
-        11: app.filter_movies
-    }
-    app.welcome_page()
-    while True:
-        user_input = app.main_menu()
-        # Call the corresponding function or return if not valid
-        func = menu_options.get(user_input, app.returner_func)
-        func()
+    def run(self):
+        self.app.welcome_page()
+        while True:
+            user_input = self.app.main_menu()
+            # Call the corresponding function or return if not valid
+            func = self.menu_options.get(user_input, self.app.returner_func)
+            func()
 
 
 if __name__ == '__main__':
-    main()
+    app = MovieApplicationRun()
+    app.run()
