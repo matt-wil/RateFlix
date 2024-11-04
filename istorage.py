@@ -38,6 +38,6 @@ class IStorage(ABC):
         pass
 
     @abstractmethod
-    def save_movies(self, movies):
+    def _save_movies(self, movies):
         pass
 

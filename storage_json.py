@@ -3,6 +3,26 @@ import json
 
 
 class StorageJson(IStorage):
+    """
+    Child of the Abstract(IStorage) class in order to work with accessing and saving files under json format.
+    Methods:
+        __init__(file_path):
+            initialise the StorageJson object with the file_path for the file.
+        list_movies:
+            read the json file and return a dictionary to be accesses within the program.
+        add_movie(title, rating, year):
+            reads the json file, receive the title, rating and
+            year from the user and adds the movie into the dictionary
+            then saves the dictionary back into the json file
+        delete_movie(title):
+            reads the json file and checks if the given title is in the file.
+            If so the movie is deleted and the file resaved.
+        update_movie(title, rating):
+            reads the json file if the given title is there it will update the rating and resave the file.
+        _save_movies(movies):
+            writes/saves the movies dictionary back to the movies.json file.
+
+    """
     def __init__(self, file_path="movies.json"):
         self.file_path = file_path
 
@@ -13,31 +33,29 @@ class StorageJson(IStorage):
         except FileNotFoundError:
             return {}
 
-    def add_movie(self, title, rating, year):
+    def add_movie(self, title: str, rating: float, year: int):
         """Reads the json file adds a movie into the correct format and then saves the json file"""
         movies = self.list_movies()
         movies[title] = {"rating": rating,
                          "year": year
                          }
         # save back to file
-        self.save_movies(movies)
+        self._save_movies(movies)
 
-    def delete_movie(self, title):
+    def delete_movie(self, title: str):
         movies = self.list_movies()
         # delete the movie
         if title in movies:
             del movies[title]
-            self.save_movies(movies)
+            self._save_movies(movies)
 
-    def update_movie(self, title, rating):
+    def update_movie(self, title: str, rating: float):
         movies = self.list_movies()
         # update the movie rating
         if title in movies:
             movies[title]["rating"] = rating
-            self.save_movies(movies)
+            self._save_movies(movies)
 
-    def save_movies(self, movies):
+    def _save_movies(self, movies: dict):
         with open(self.file_path, "w") as json_file:
             json.dump(movies, json_file, indent=4)
-
-
