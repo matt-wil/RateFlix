@@ -39,13 +39,14 @@ class StorageCSV(IStorage):
                 for row in reader:
                     movies[row["title"]] = {
                         "rating": row["rating"],
-                        "year": row["year"]
+                        "year": row["year"],
+                        "poster": row["poster"]
                     }
         except FileNotFoundError:
             pass
         return movies
 
-    def add_movie(self, title: str, rating: float, year: int):
+    def add_movie(self, title: str, rating: float, year: int, poster: str):
         """
         Adds a new movie to the csv file! if the file doesn't exist it will create the file.
         :param title:
@@ -56,13 +57,13 @@ class StorageCSV(IStorage):
         file_exists = os.path.isfile(self.file_path)
 
         with open(self.file_path, mode="a", newline="") as csv_file:
-            fieldnames = ["title", "rating", "year"]
+            fieldnames = ["title", "rating", "year", "poster"]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
 
             if not file_exists:
                 writer.writeheader()
 
-            writer.writerow({"title": title, "rating": rating, "year": year})
+            writer.writerow({"title": title, "rating": rating, "year": year, "poster": poster})
 
     def delete_movie(self, title: str):
         movies = self.list_movies()
@@ -71,23 +72,17 @@ class StorageCSV(IStorage):
             del movies[title]
             self._save_movies(movies)
 
-    def update_movie(self, title: str, rating: float):
-        movies = self.list_movies()
-        # update the movie rating
-        if title in movies:
-            movies[title]["rating"] = rating
-            self._save_movies(movies)
-
     def _save_movies(self, movies: dict):
         with open(self.file_path, mode="w", newline="") as csv_file:
-            fieldnames = ["title", "rating", "year"]
+            fieldnames = ["title", "rating", "year", "poster"]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader()
             for title, info in movies.items():
                 writer.writerow({
                     "title": title,
                     "rating": info["rating"],
-                    "year": info["year"]
+                    "year": info["year"],
+                    "poster": info["poster"]
                 })
 
 

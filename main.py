@@ -16,14 +16,13 @@ class MovieApplicationRun:
             1: self.app.list_movies,
             2: self.app.add_movie,
             3: self.app.delete_movie,
-            4: self.app.update_movie,
-            5: self.app.stats,
-            6: self.app.random_movie,
-            7: self.app.search_movie,
-            8: self.app.movies_sorted_by_rating,
-            9: self.app.create_histogram_and_save,
-            10: self.app.movies_sorted_by_chronological_order,
-            11: self.app.filter_movies
+            4: self.app.stats,
+            5: self.app.random_movie,
+            6: self.app.search_movie,
+            7: self.app.movies_sorted_by_rating,
+            8: self.app.create_histogram_and_save,
+            9: self.app.movies_sorted_by_chronological_order,
+            10: self.app.filter_movies,
         }
 
     def run(self):

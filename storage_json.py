@@ -33,11 +33,12 @@ class StorageJson(IStorage):
         except FileNotFoundError:
             return {}
 
-    def add_movie(self, title: str, rating: float, year: int):
+    def add_movie(self, title: str, rating: float, year: int, poster: str):
         """Reads the json file adds a movie into the correct format and then saves the json file"""
         movies = self.list_movies()
         movies[title] = {"rating": rating,
-                         "year": year
+                         "year": year,
+                         "poster": poster
                          }
         # save back to file
         self._save_movies(movies)
@@ -47,13 +48,6 @@ class StorageJson(IStorage):
         # delete the movie
         if title in movies:
             del movies[title]
-            self._save_movies(movies)
-
-    def update_movie(self, title: str, rating: float):
-        movies = self.list_movies()
-        # update the movie rating
-        if title in movies:
-            movies[title]["rating"] = rating
             self._save_movies(movies)
 
     def _save_movies(self, movies: dict):

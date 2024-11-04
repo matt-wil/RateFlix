@@ -1,15 +1,21 @@
 # Welcome to Matt's Epic Movie Dictionary!
+import os
 import time
 from fuzzywuzzy import process
 import Levenshtein
 import matplotlib.pyplot as plt
 import random
-from old_app import movie_data
 import sys
 from colorama import Fore, Style, Back, init
-import datetime
-import textwrap
+import requests
+from requests.exceptions import HTTPError, ConnectionError, Timeout, RequestException
 init(autoreset=True)
+
+# access environment variable for api_key
+from dotenv import load_dotenv
+load_dotenv()
+api_key = os.getenv("API_KEY")
+OMDb_url = "http://www.omdbapi.com/?apikey="
 
 # Error Logs
 import logging
@@ -135,17 +141,16 @@ class MovieApp:
             print(Fore.LIGHTWHITE_EX + "1. List movies")
             print(Fore.LIGHTWHITE_EX + "2. Add movie")
             print(Fore.LIGHTWHITE_EX + "3. Delete movie")
-            print(Fore.LIGHTWHITE_EX + "4. Update movie")
-            print(Fore.LIGHTWHITE_EX + "5. Stats")
-            print(Fore.LIGHTWHITE_EX + "6. Random movie")
-            print(Fore.LIGHTWHITE_EX + "7. Search movie")
-            print(Fore.LIGHTWHITE_EX + "8. Movies sorted by rating")
-            print(Fore.LIGHTWHITE_EX + "9. Create a histogram")
-            print(Fore.LIGHTWHITE_EX + "10. Movies sorted by Chronological order")
-            print(Fore.LIGHTWHITE_EX + "11. Filter movies")
+            print(Fore.LIGHTWHITE_EX + "4. Stats")
+            print(Fore.LIGHTWHITE_EX + "5. Random movie")
+            print(Fore.LIGHTWHITE_EX + "6. Search movie")
+            print(Fore.LIGHTWHITE_EX + "7. Movies sorted by rating")
+            print(Fore.LIGHTWHITE_EX + "8. Create a histogram")
+            print(Fore.LIGHTWHITE_EX + "9. Movies sorted by Chronological order")
+            print(Fore.LIGHTWHITE_EX + "10. Filter movies")
             print()
 
-            user_menu_input = input(Fore.LIGHTGREEN_EX + "Enter choice (0-11): \n >>> ")
+            user_menu_input = input(Fore.LIGHTGREEN_EX + "Enter choice (0-10): \n >>> ")
 
             if user_menu_input.strip() == "":
                 print(Fore.MAGENTA + "You forget to enter a menu number!")
@@ -153,7 +158,7 @@ class MovieApp:
 
             try:
                 user_menu_input = int(user_menu_input)
-                if 0 <= user_menu_input <= 11:
+                if 0 <= user_menu_input <= 10:
                     return user_menu_input
                 else:
                     print(Fore.MAGENTA + "Please enter a number between 0-11")
@@ -197,34 +202,18 @@ class MovieApp:
             if not movie_to_add:
                 raise ValueError("You didn't type a movie name")
 
-            movie_rating = float(input(Fore.LIGHTGREEN_EX + "Enter a rating: \n>>> "))
-            movie_year = (int(input(Fore.LIGHTGREEN_EX + "Enter the year of release \n>>> ")))
-
-            # get current year
-            current_year = datetime.datetime.now().year
-            if 1988 <= movie_year <= current_year:
-                if movie_to_add in movies:
-                    print(Fore.CYAN + "Movie is already in the Library."
-                                      "Taking you back to the main menu")
-                    self.returner_func()
-                    return
-
-                elif 0 <= movie_rating <= 10:
-                    self._storage.add_movie(movie_to_add, movie_rating, movie_year)
-                    print(
-                        f"You successfully added {Fore.YELLOW}{movie_to_add}{Fore.RESET}.\nReleased in {Fore.YELLOW}{movie_year}{Fore.RESET} and has a rating of {Fore.YELLOW}{movie_rating}{Fore.RESET}!")
-                else:
-                    print("Rating must be between 0-10")
-            else:
-                print(f"{Fore.RED}That cant be right!")
-                fun_fact1 = f"{Fore.MAGENTA}Fun fact: {Fore.LIGHTWHITE_EX}did you know In Leeds, England Louis Le Prince films Roundhay Garden Scene is believed to be the first motion picture recorded created in 1888.\nBut it is possible to argue (as many film historians do) that the first ever “movie” was Eadweard Muybridge's The Horse In Motion in 1878, a sequence of a dozen photographs of a horse which, when viewed together, conveyed the sense of the horse literally being in motion."
-                print(self.long_text_wrapper(fun_fact1))
-
-        except ValueError:
-            print(Fore.RED + "Please enter something Valid!")
+            if movie_to_add in movies:
+                print(Fore.CYAN + "Movie is already in the Library.\n"
+                                  "Taking you back to the main menu")
+                self.returner_func()
+                return
+            movie_to_add, movie_rating, movie_year, movie_poster = self.api_extraction(movie_to_add, api_key, OMDb_url)
+            self._storage.add_movie(movie_to_add, movie_rating, movie_year, movie_poster)
+            print(f"{movie_to_add} successfully added to the RateFlix Library. "
+                  f"Released in {movie_year} it has a imdb rating of {movie_rating}")
         except Exception as e:
-            logging.error(e)
-            print(f"{Fore.RED + Back.BLACK}Something went wrong... \nError message {e} \nPlease try again!")
+            print(f"Error occurred: {e}")
+
         self.returner_func()
 
     def delete_movie(self):
@@ -245,34 +234,6 @@ class MovieApp:
         except Exception as e:
             logging.error(e)
             print(f"{Fore.RED + Back.BLACK}Oh oh! Something went wrong.\nError message: {e}")
-        self.returner_func()
-
-    def update_movie(self):
-        """
-        Updates an existing movie's rating in the RateFlix library.
-        The user is prompted to provide the movie title and a new rating.
-        :return: F-Strings
-        """
-        movies = self._storage.list_movies()
-
-        update_movie_name = input(
-            Fore.LIGHTGREEN_EX + "Which movie would you like to update in the RateFlix library? \n >>> ")
-        if update_movie_name in movies:
-            try:
-                rating_to_give = float(
-                    input(Fore.LIGHTGREEN_EX + "What's the new rating you would like to give the movie? \n >>> "))
-                if 0 <= rating_to_give <= 10:
-                    self._storage.update_movie(update_movie_name, rating_to_give)
-                    print(
-                        f"{Fore.YELLOW}{update_movie_name}{Fore.RESET} updated in RateFlix library with a rating of: {Fore.YELLOW}{rating_to_give}")
-                else:
-                    print(Fore.RED + "Movie ratings are between 0 and 10...")
-            except ValueError:
-                print(Fore.RED + "Incorrect input")
-            except Exception as e:
-                print(Fore.RED + Back.BLACK + f"Oh ohh!!\nError code: {e}")
-        else:
-            print(f"Well {Fore.YELLOW}{update_movie_name}{Fore.RESET} is not there! Maybe you should add it!")
         self.returner_func()
 
     def stats(self):
@@ -502,9 +463,34 @@ class MovieApp:
             print(Fore.RED + "No movies found matching the criteria")
         self.returner_func()
 
-    def long_text_wrapper(self, text, wrap=80):
-        wrapped_text = textwrap.fill(text, width=wrap)
-        return wrapped_text
+    def api_extraction(self, title, api, url, search_type="&t="):
+        """
+        searches the OMDb database for given Title movie and returns the movie title, rating, year and poster URL
+        :param title: (str)
+        :param api: (str) Api key for OMDb
+        :param url: (str) Url for OMDb
+        :param search_type: (str) search type keyword set for Movie title search
+        :return: movie name, movie rating, movie year of release and the Poster URL
+        """
+        try:
+            response = requests.get(url + api + search_type + title)
+            response.raise_for_status()
+            movie_info = response.json()
+            movie = movie_info["Title"]
+            rating = movie_info["imdbRating"]
+            year = movie_info["Year"]
+            poster_url = movie_info["Poster"]
+            return movie, rating, year, poster_url
+        except HTTPError as e:
+            print(f"HTTP error occurred: {e} - Status Code: {response.status_code}")
+        except ConnectionError as e:
+            print(f"Connection Error: unable to connect to API {e}")
+        except Timeout:
+            print(f"Error request has timed out")
+        except RequestException as e:
+            print(f"Ann error occurred: {e}")
+
+
 
 
 

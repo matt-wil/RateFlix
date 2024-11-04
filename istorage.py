@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from dotenv import load_dotenv
 
 
 class IStorage(ABC):
@@ -14,7 +15,7 @@ class IStorage(ABC):
         pass
 
     @abstractmethod
-    def add_movie(self, title, year, rating):
+    def add_movie(self, title, year, rating, poster):
         """
         add a movie into the RateFlix app database
         :return:
@@ -30,14 +31,5 @@ class IStorage(ABC):
         pass
 
     @abstractmethod
-    def update_movie(self, title, rating):
-        """
-        update a movie that is currently in the RateFlix app database
-        :return: 
-        """
-        pass
-
-    @abstractmethod
     def _save_movies(self, movies):
         pass
-

@@ -66,5 +66,15 @@
     "Murder Mindfully": {
         "rating": 9.5,
         "year": 2024
+    },
+    "Toy Story": {
+        "rating": "8.3",
+        "year": "1995",
+        "poster": "https://m.media-amazon.com/images/M/MV5BZTA3OWVjOWItNjE1NS00NzZiLWE1MjgtZDZhMWI1ZTlkNzYwXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "Toy Story 2": {
+        "rating": "7.9",
+        "year": "1999",
+        "poster": "https://m.media-amazon.com/images/M/MV5BNzVmODlhMDEtY2YxZi00OTVjLTlkNTktN2Q2OTRlM2I4M2FhXkEyXkFqcGc@._V1_SX300.jpg"
     }
 }
