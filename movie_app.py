@@ -132,20 +132,21 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
             print()
             print(Fore.LIGHTWHITE_EX + "Menu:")
             print(Fore.RED + "0. Exit")
-            print(Fore.LIGHTWHITE_EX + "1. List movies")
-            print(Fore.LIGHTWHITE_EX + "2. Add movie")
-            print(Fore.LIGHTWHITE_EX + "3. Delete movie")
-            print(Fore.LIGHTWHITE_EX + "4. Stats")
-            print(Fore.LIGHTWHITE_EX + "5. Random movie")
-            print(Fore.LIGHTWHITE_EX + "6. Search movie")
-            print(Fore.LIGHTWHITE_EX + "7. Movies sorted by rating")
-            print(Fore.LIGHTWHITE_EX + "8. Create a histogram")
-            print(Fore.LIGHTWHITE_EX + "9. Movies sorted by Chronological order")
-            print(Fore.LIGHTWHITE_EX + "10. Filter movies")
-            print(Fore.LIGHTWHITE_EX + "11. Generate Website")
+            print(Fore.LIGHTWHITE_EX + "1. List Movies")
+            print(Fore.LIGHTWHITE_EX + "2. Add Movie")
+            print(Fore.LIGHTWHITE_EX + "3. Delete Movie")
+            print(Fore.LIGHTWHITE_EX + "4. Update Movie Note")
+            print(Fore.LIGHTWHITE_EX + "5. Stats")
+            print(Fore.LIGHTWHITE_EX + "6. Random Movie")
+            print(Fore.LIGHTWHITE_EX + "7. Search Movie")
+            print(Fore.LIGHTWHITE_EX + "8. Movies Sorted by Rating")
+            print(Fore.LIGHTWHITE_EX + "9. Create a Histogram")
+            print(Fore.LIGHTWHITE_EX + "10. Movies Sorted by Chronological Order")
+            print(Fore.LIGHTWHITE_EX + "11. Filter Movies")
+            print(Fore.LIGHTWHITE_EX + "12. Generate Website")
             print()
 
-            user_menu_input = input(Fore.LIGHTGREEN_EX + "Enter choice (0-11): \n >>> ")
+            user_menu_input = input(Fore.LIGHTGREEN_EX + "Enter choice (0-12): \n >>> ")
 
             if user_menu_input.strip() == "":
                 print(Fore.MAGENTA + "You forget to enter a menu number!")
@@ -153,10 +154,10 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
 
             try:
                 user_menu_input = int(user_menu_input)
-                if 0 <= user_menu_input <= 11:
+                if 0 <= user_menu_input <= 12:
                     return user_menu_input
                 else:
-                    print(Fore.MAGENTA + "Please enter a number between 0-11")
+                    print(Fore.MAGENTA + "Please enter a number between 0-12")
 
             except ValueError:
                 print(Fore.MAGENTA + "Enter only numbers please!")
@@ -185,6 +186,28 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
             print(f"\twas released in {Fore.YELLOW}{details['year']}\n")
         self.returner_func()
 
+    def update_movie(self):
+        """
+        :return:
+        """
+        movies = self._storage.list_movies()
+
+        update_movie_name = input(
+            Fore.LIGHTGREEN_EX + "Which movie would you like to add a note to?\n>>> "
+        )
+        if update_movie_name in movies:
+            notes = input("What note would you like to add?\n>>> ")
+            if notes.strip():
+                self._storage.update_movie(update_movie_name, notes)
+                print("Note successfully added!")
+                self.returner_func()
+            else:
+                print("Please enter a Valid note")
+                time.sleep(2)
+        else:
+            print("Movie not in the Library")
+            self.returner_func()
+            
     def add_movie(self):
         """
         Asking the user to input to add a movie and its rating to the dictionary.
@@ -510,8 +533,9 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
                     <img class="movie-poster" src="{details.get("poster")}">
                     <div class="text">
                         <div class="movie-title">{title}</div>
-                        <div class="movie-rating">{details.get("rating")}</div>
                         <div class="movie-year">{details.get("year")}</div>
+                        <div class="movie-rating">iMDb Rating: {details.get("rating")}</div>
+                        <div class="movie-note">{details.get("note", "")}</div>
                     </div>
                 </div>
         """
@@ -529,11 +553,4 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
 
         print("Website was generated successfully")
         time.sleep(2)
-
-
-
-
-
-
-
 

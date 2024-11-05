@@ -34,6 +34,13 @@ class StorageJson(IStorage):
         except FileNotFoundError:
             return {}
 
+    def update_movie(self, title: str, note: str):
+        movies = self.list_movies()
+        # update the movie rating
+        if title in movies:
+            movies[title]["note"] = note
+            self._save_movies(movies)
+
     def add_movie(self, title: str, rating: float, year: int, poster: str):
         """Reads the json file adds a movie into the correct format and then saves the json file"""
         movies = self.list_movies()

@@ -30,5 +30,13 @@ class IStorage(ABC):
         pass
 
     @abstractmethod
+    def update_movie(self, title, note):
+        """
+        update a movie that is currently in the RateFlix app database
+        :return:
+        """
+        pass
+
+    @abstractmethod
     def _save_movies(self, movies):
         pass

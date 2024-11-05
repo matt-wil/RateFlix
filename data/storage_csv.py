@@ -41,11 +41,19 @@ class StorageCSV(IStorage):
                     movies[row["title"]] = {
                         "rating": row["rating"],
                         "year": row["year"],
-                        "poster": row["poster"]
+                        "poster": row["poster"],
+                        "note": row["note"]
                     }
         except FileNotFoundError:
             pass
         return movies
+
+    def update_movie(self, title: str, note: str):
+        movies = self.list_movies()
+        # update the movie rating
+        if title in movies:
+            movies[title]["note"] = note
+            self._save_movies(movies)
 
     def add_movie(self, title: str, rating: float, year: int, poster: str):
         """
@@ -53,6 +61,7 @@ class StorageCSV(IStorage):
         :param title:
         :param rating:
         :param year:
+        :param poster:
         :return:
         """
         file_exists = os.path.isfile(self.file_path)
@@ -83,7 +92,8 @@ class StorageCSV(IStorage):
                     "title": title,
                     "rating": info["rating"],
                     "year": info["year"],
-                    "poster": info["poster"]
+                    "poster": info["poster"],
+                    "note": info["note"]
                 })
 
 

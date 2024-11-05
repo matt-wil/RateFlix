@@ -32,7 +32,8 @@
     "Beetlejuice": {
         "rating": "7.5",
         "year": "1988",
-        "poster": "https://m.media-amazon.com/images/M/MV5BYjkwNzVlNDEtMTJlNy00OTdlLTljYWItM2RkZmZkYzY3YjM2XkEyXkFqcGc@._V1_SX300.jpg"
+        "poster": "https://m.media-amazon.com/images/M/MV5BYjkwNzVlNDEtMTJlNy00OTdlLTljYWItM2RkZmZkYzY3YjM2XkEyXkFqcGc@._V1_SX300.jpg",
+        "note": "Thats my Favourite Movie :P"
     },
     "Terminator": {
         "rating": "6.1",
@@ -63,5 +64,26 @@
         "rating": "8.8",
         "year": "1999",
         "poster": "https://m.media-amazon.com/images/M/MV5BOTgyOGQ1NDItNGU3Ny00MjU3LTg2YWEtNmEyYjBiMjI1Y2M5XkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "Forrest Gump": {
+        "rating": "8.8",
+        "year": "1994",
+        "poster": "https://m.media-amazon.com/images/M/MV5BNDYwNzVjMTItZmU5YS00YjQ5LTljYjgtMjY2NDVmYWMyNWFmXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "Titanic": {
+        "rating": "7.9",
+        "year": "1997",
+        "poster": "https://m.media-amazon.com/images/M/MV5BYzYyN2FiZmUtYWYzMy00MzViLWJkZTMtOGY1ZjgzNWMwN2YxXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "Star Wars: Episode IV - A New Hope": {
+        "rating": "8.6",
+        "year": "1977",
+        "poster": "https://m.media-amazon.com/images/M/MV5BOGUwMDk0Y2MtNjBlNi00NmRiLTk2MWYtMGMyMDlhYmI4ZDBjXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "Spaceballs": {
+        "rating": "7.1",
+        "year": "1987",
+        "poster": "https://m.media-amazon.com/images/M/MV5BZWNhNWM3NWQtNTMwNy00NThiLWFkZDYtYzBlZTQyZGU2YzE1XkEyXkFqcGc@._V1_SX300.jpg",
+        "note": "I Love this Movie"
     }
 }
