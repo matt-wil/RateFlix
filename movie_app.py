@@ -1,6 +1,8 @@
 # Welcome to Matt's Epic Movie Dictionary!
 import os
 import time
+from os.path import join
+
 from fuzzywuzzy import process
 import Levenshtein
 import matplotlib.pyplot as plt
@@ -21,7 +23,7 @@ OMDb_url = "http://www.omdbapi.com/?apikey="
 import logging
 logging.basicConfig(
     level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s', handlers=[
-        logging.FileHandler('app_errors.log'),
+        logging.FileHandler('logs/app_errors.log'),
         logging.StreamHandler()
     ]
 )
@@ -237,7 +239,7 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
         movies = self._storage.list_movies()
 
         # calculate average
-        ratings = [movie["rating"] for movie in movies.values()]
+        ratings = [float(movie["rating"]) for movie in movies.values()]
         if ratings:
             average = sum(ratings) / len(ratings)
             print(f"The Average rating is: {Fore.YELLOW}{average:.2f}")
@@ -363,7 +365,7 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
         filename = input("Please enter a file name to save the histogram.\n>>> ")
         if not filename.endswith(".png"):
             filename += ".png"
-        plt.savefig(filename)
+        plt.savefig(join("histograms", filename))
 
         plt.show()
 
@@ -438,14 +440,14 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
         # access movies
         filtered_movies = []
         for movie, details in movies.items():
-            rating = details["rating"]
-            year = details["year"]
+            rating = float(details["rating"])
+            year = int(details["year"])
 
             # Apply filters, respecting empty inputs
             if (min_rating is None or rating >= min_rating) and \
                     (start_year is None or year >= start_year) and \
                     (end_year is None or year <= end_year):
-                filtered_movies.append(f"{movie} ({year}): {rating}")
+                filtered_movies.append(f"{movie} ({year}): {rating:.2f}")
 
         # output
         if filtered_movies:
@@ -522,10 +524,11 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
         </html>
         """
 
-        with open("index.html", "w") as file:
+        with open(join("web", "index.html"), "w") as file:
             file.write(html_content)
 
         print("Website was generated successfully")
+        time.sleep(2)
 
 
 

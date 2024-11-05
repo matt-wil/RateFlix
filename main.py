@@ -1,6 +1,6 @@
 from movie_app import MovieApp
-from storage_json import StorageJson
-from storage_csv import StorageCSV
+from data.storage_json import StorageJson
+from data.storage_csv import (StorageCSV)
 
 
 class MovieApplicationRun:

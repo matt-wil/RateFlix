@@ -1,4 +1,5 @@
-from istorage import IStorage
+from os.path import join
+from data.istorage import IStorage
 import csv
 import os
 
@@ -24,7 +25,7 @@ class StorageCSV(IStorage):
                 writes/saves the movies dictionary back to the movies.csv file.
 
         """
-    def __init__(self, file_path="movies.csv"):
+    def __init__(self, file_path=join("storage", "movies.csv")):
         self.file_path = file_path
 
     def list_movies(self):

@@ -9,11 +9,6 @@
         "year": "1999",
         "poster": "https://m.media-amazon.com/images/M/MV5BNzVmODlhMDEtY2YxZi00OTVjLTlkNTktN2Q2OTRlM2I4M2FhXkEyXkFqcGc@._V1_SX300.jpg"
     },
-    "The Shawshank Redemption": {
-        "rating": "9.3",
-        "year": "1994",
-        "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX300.jpg"
-    },
     "Pulp Fiction": {
         "rating": "8.9",
         "year": "1994",
@@ -38,5 +33,35 @@
         "rating": "7.5",
         "year": "1988",
         "poster": "https://m.media-amazon.com/images/M/MV5BYjkwNzVlNDEtMTJlNy00OTdlLTljYWItM2RkZmZkYzY3YjM2XkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "Terminator": {
+        "rating": "6.1",
+        "year": "1991",
+        "poster": "N/A"
+    },
+    "Speed": {
+        "rating": "7.3",
+        "year": "1994",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMDc2ODI5YWQtMmM2ZS00MTdmLWEyNWEtNmRmOGE5NGZlYWMzXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "The Dark Knight": {
+        "rating": "9.0",
+        "year": "2008",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg"
+    },
+    "The Godfather Part II": {
+        "rating": "9.0",
+        "year": "1974",
+        "poster": "https://m.media-amazon.com/images/M/MV5BNzc1OWY5MjktZDllMi00ZDEzLWEwMGItYjk1YmRhYjBjNTVlXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "The Shawshank Redemption": {
+        "rating": "9.3",
+        "year": "1994",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "Fight Club": {
+        "rating": "8.8",
+        "year": "1999",
+        "poster": "https://m.media-amazon.com/images/M/MV5BOTgyOGQ1NDItNGU3Ny00MjU3LTg2YWEtNmEyYjBiMjI1Y2M5XkEyXkFqcGc@._V1_SX300.jpg"
     }
 }

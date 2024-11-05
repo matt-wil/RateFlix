@@ -1,4 +1,5 @@
-from istorage import IStorage
+from os.path import join
+from data.istorage import IStorage
 import json
 
 
@@ -23,7 +24,7 @@ class StorageJson(IStorage):
             writes/saves the movies dictionary back to the movies.json file.
 
     """
-    def __init__(self, file_path="movies.json"):
+    def __init__(self, file_path=join("storage", "movies.json")):
         self.file_path = file_path
 
     def list_movies(self):
