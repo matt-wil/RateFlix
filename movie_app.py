@@ -148,9 +148,10 @@ class MovieApp:
             print(Fore.LIGHTWHITE_EX + "8. Create a histogram")
             print(Fore.LIGHTWHITE_EX + "9. Movies sorted by Chronological order")
             print(Fore.LIGHTWHITE_EX + "10. Filter movies")
+            print(Fore.LIGHTWHITE_EX + "11. Generate Website")
             print()
 
-            user_menu_input = input(Fore.LIGHTGREEN_EX + "Enter choice (0-10): \n >>> ")
+            user_menu_input = input(Fore.LIGHTGREEN_EX + "Enter choice (0-11): \n >>> ")
 
             if user_menu_input.strip() == "":
                 print(Fore.MAGENTA + "You forget to enter a menu number!")
@@ -158,7 +159,7 @@ class MovieApp:
 
             try:
                 user_menu_input = int(user_menu_input)
-                if 0 <= user_menu_input <= 10:
+                if 0 <= user_menu_input <= 11:
                     return user_menu_input
                 else:
                     print(Fore.MAGENTA + "Please enter a number between 0-11")
@@ -489,6 +490,50 @@ class MovieApp:
             print(f"Error request has timed out")
         except RequestException as e:
             print(f"Ann error occurred: {e}")
+
+    def generate_website(self):
+        movies = self._storage.list_movies()
+        html_content = """
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="style.css"/>
+            <title>RateFlix</title>
+        </head>
+        <body>
+        <main>
+            <div class="list-movies-title">
+                <h1>RateFlix Movie Library</h1>
+            </div>
+            <div class="list">
+        """
+        # add all movies to html list
+        for title, details in movies.items():
+            html_content += f"""
+                <div class="movie">
+                    <img class="movie-poster" src="{details.get("poster")}">
+                    <div class="text">
+                        <div class="movie-title">{title}</div>
+                        <div class="movie-rating">{details.get("rating")}</div>
+                        <div class="movie-year">{details.get("year")}</div>
+                    </div>
+                </div>
+        """
+
+        # closing tags
+        html_content += """
+            </div>
+        </main>
+        </body>
+        </html>
+        """
+
+        with open("index.html", "w") as file:
+            file.write(html_content)
+
+        print("Website was generated successfully")
 
 
 

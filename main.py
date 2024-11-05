@@ -23,6 +23,7 @@ class MovieApplicationRun:
             8: self.app.create_histogram_and_save,
             9: self.app.movies_sorted_by_chronological_order,
             10: self.app.filter_movies,
+            11: self.app.generate_website,
         }
 
     def run(self):

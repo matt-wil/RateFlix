@@ -1,72 +1,4 @@
 {
-    "The Shawshank Redemption": {
-        "rating": 9.5,
-        "year": 1994
-    },
-    "Pulp Fiction": {
-        "rating": 8.8,
-        "year": 1994
-    },
-    "The Godfather": {
-        "rating": 9.2,
-        "year": 1972
-    },
-    "The Godfather: Part II": {
-        "rating": 9.0,
-        "year": 1974
-    },
-    "The Dark Knight": {
-        "rating": 9.0,
-        "year": 2008
-    },
-    "12 Angry Men": {
-        "rating": 8.9,
-        "year": 1957
-    },
-    "Everything Everywhere All At Once": {
-        "rating": 8.9,
-        "year": 2022
-    },
-    "Forrest Gump": {
-        "rating": 8.8,
-        "year": 1994
-    },
-    "Star Wars: Episode V": {
-        "rating": 8.7,
-        "year": 1980
-    },
-    "Scary Movie": {
-        "rating": 9.0,
-        "year": 2000
-    },
-    "Terminator": {
-        "rating": 9.0,
-        "year": 2000
-    },
-    "Beetlejuice": {
-        "rating": 9.5,
-        "year": 2003
-    },
-    "Ghost": {
-        "rating": 7.0,
-        "year": 2002
-    },
-    "Thor": {
-        "rating": 8.8,
-        "year": 2009
-    },
-    "The Penguin": {
-        "rating": 9.5,
-        "year": 2022
-    },
-    "The Joker": {
-        "rating": 9.0,
-        "year": 2020
-    },
-    "Murder Mindfully": {
-        "rating": 9.5,
-        "year": 2024
-    },
     "Toy Story": {
         "rating": "8.3",
         "year": "1995",
@@ -76,5 +8,35 @@
         "rating": "7.9",
         "year": "1999",
         "poster": "https://m.media-amazon.com/images/M/MV5BNzVmODlhMDEtY2YxZi00OTVjLTlkNTktN2Q2OTRlM2I4M2FhXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "The Shawshank Redemption": {
+        "rating": "9.3",
+        "year": "1994",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "Pulp Fiction": {
+        "rating": "8.9",
+        "year": "1994",
+        "poster": "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "Batman": {
+        "rating": "7.5",
+        "year": "1989",
+        "poster": "https://m.media-amazon.com/images/M/MV5BYzZmZWViM2EtNzhlMi00NzBlLWE0MWEtZDFjMjk3YjIyNTBhXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "Lauf um Dein Leben - Vom Junkie zum Ironman": {
+        "rating": "6.0",
+        "year": "2008",
+        "poster": "https://m.media-amazon.com/images/M/MV5BYzA3YjNjZDAtYWU2MC00YmIyLTkzMjEtOGE5YmIyZmYxODIzXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "Iron Man": {
+        "rating": "7.9",
+        "year": "2008",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SX300.jpg"
+    },
+    "Beetlejuice": {
+        "rating": "7.5",
+        "year": "1988",
+        "poster": "https://m.media-amazon.com/images/M/MV5BYjkwNzVlNDEtMTJlNy00OTdlLTljYWItM2RkZmZkYzY3YjM2XkEyXkFqcGc@._V1_SX300.jpg"
     }
 }
