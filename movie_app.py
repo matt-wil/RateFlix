@@ -70,7 +70,7 @@ class MovieApp:
     """
     def __init__(self, storage):
         """
-        initializing the RateFlix Movie App with the storage instance to manage data.
+        initializing the Movie App with the storage instance to manage data.
         :param storage: (Storage(class)) instance of the storage class to retrieve and save data.
         """
         self._storage = storage
@@ -87,41 +87,33 @@ class MovieApp:
                 time.sleep(step / 1000)
 
         ascii_title = r"""
-     ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄            ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄       ▄▄  ▄▄▄▄▄▄▄▄▄▄▄
-    ▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░▌          ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░▌     ▐░░▌▐░░░░░░░░░░░▌
-    ▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░▌          ▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌▐░▌░▌   ▐░▐░▌▐░█▀▀▀▀▀▀▀▀▀
-    ▐░▌       ▐░▌▐░▌          ▐░▌          ▐░▌          ▐░▌       ▐░▌▐░▌▐░▌ ▐░▌▐░▌▐░▌
-    ▐░▌   ▄   ▐░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░▌          ▐░▌          ▐░▌       ▐░▌▐░▌ ▐░▐░▌ ▐░▌▐░█▄▄▄▄▄▄▄▄▄
-    ▐░▌  ▐░▌  ▐░▌▐░░░░░░░░░░░▌▐░▌          ▐░▌          ▐░▌       ▐░▌▐░▌  ▐░▌  ▐░▌▐░░░░░░░░░░░▌
-    ▐░▌ ▐░▌░▌ ▐░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░▌          ▐░▌          ▐░▌       ▐░▌▐░▌   ▀   ▐░▌▐░█▀▀▀▀▀▀▀▀▀
-    ▐░▌▐░▌ ▐░▌▐░▌▐░▌          ▐░▌          ▐░▌          ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌
-    ▐░▌░▌   ▐░▐░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌▐░▌       ▐░▌▐░█▄▄▄▄▄▄▄▄▄
-    ▐░░▌     ▐░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌
-     ▀▀       ▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀
-
-               ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄
-              ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
-               ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌
-                   ▐░▌     ▐░▌       ▐░▌
-                   ▐░▌     ▐░▌       ▐░▌
-                   ▐░▌     ▐░▌       ▐░▌
-                   ▐░▌     ▐░▌       ▐░▌
-                   ▐░▌     ▐░▌       ▐░▌
-                   ▐░▌     ▐░█▄▄▄▄▄▄▄█░▌
-                   ▐░▌     ▐░░░░░░░░░░░▌
-                    ▀       ▀▀▀▀▀▀▀▀▀▀▀
-
-     ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄            ▄▄▄▄▄▄▄▄▄▄▄  ▄       ▄
-    ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌          ▐░░░░░░░░░░░▌▐░▌     ▐░▌
-    ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌ ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ ▐░▌           ▀▀▀▀█░█▀▀▀▀  ▐░▌   ▐░▌
-    ▐░▌       ▐░▌▐░▌       ▐░▌     ▐░▌     ▐░▌          ▐░▌          ▐░▌               ▐░▌       ▐░▌ ▐░▌
-    ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌     ▐░▌     ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄ ▐░▌               ▐░▌        ▐░▐░▌
-    ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌     ▐░▌     ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌               ▐░▌         ▐░▌
-    ▐░█▀▀▀▀█░█▀▀ ▐░█▀▀▀▀▀▀▀█░▌     ▐░▌     ▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ ▐░▌               ▐░▌        ▐░▌░▌
-    ▐░▌     ▐░▌  ▐░▌       ▐░▌     ▐░▌     ▐░▌          ▐░▌          ▐░▌               ▐░▌       ▐░▌ ▐░▌
-    ▐░▌      ▐░▌ ▐░▌       ▐░▌     ▐░▌     ▐░█▄▄▄▄▄▄▄▄▄ ▐░▌          ▐░█▄▄▄▄▄▄▄▄▄  ▄▄▄▄█░█▄▄▄▄  ▐░▌   ▐░▌
-    ▐░▌       ▐░▌▐░▌       ▐░▌     ▐░▌     ▐░░░░░░░░░░░▌▐░▌          ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌     ▐░▌
-     ▀         ▀  ▀         ▀       ▀       ▀▀▀▀▀▀▀▀▀▀▀  ▀            ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀       ▀
+____    __    ____  _______  __        ______   ______   .___  ___.  _______ 
+\   \  /  \  /   / |   ____||  |      /      | /  __  \  |   \/   | |   ____|
+ \   \/    \/   /  |  |__   |  |     |  ,----'|  |  |  | |  \  /  | |  |__   
+  \            /   |   __|  |  |     |  |     |  |  |  | |  |\/|  | |   __|  
+   \    /\    /    |  |____ |  `----.|  `----.|  `--'  | |  |  |  | |  |____ 
+    \__/  \__/     |_______||_______| \______| \______/  |__|  |__| |_______|
+                                                                             
+.___________.  ______                                                        
+|           | /  __  \                                                       
+`---|  |----`|  |  |  |                                                      
+    |  |     |  |  |  |                                                      
+    |  |     |  `--'  |                                                      
+    |__|      \______/                                                       
+                                                                             
+.______     ______   .______     ______   ______   .______      .__   __.    
+|   _  \   /  __  \  |   _  \   /      | /  __  \  |   _  \     |  \ |  |    
+|  |_)  | |  |  |  | |  |_)  | |  ,----'|  |  |  | |  |_)  |    |   \|  |    
+|   ___/  |  |  |  | |   ___/  |  |     |  |  |  | |      /     |  . `  |    
+|  |      |  `--'  | |  |      |  `----.|  `--'  | |  |\  \----.|  |\   |    
+| _|       \______/  | _|       \______| \______/  | _| `._____||__| \__|    
+                                                                             
+.______    __    ______  __  ___  _______ .______                            
+|   _  \  |  |  /      ||  |/  / |   ____||   _  \                           
+|  |_)  | |  | |  ,----'|  '  /  |  |__   |  |_)  |                          
+|   ___/  |  | |  |     |    <   |   __|  |      /                           
+|  |      |  | |  `----.|  .  \  |  |____ |  |\  \----.                      
+| _|      |__|  \______||__|\__\ |_______|| _| `._____|                      
      """
         lazy_print(ascii_title, step=3)
         time.sleep(2)
@@ -184,7 +176,7 @@ class MovieApp:
         :return:
         """
         movies = self._storage.list_movies()
-        print(f"\nThere are {len(movies.keys())} movies currently in the RateFlix library.")
+        print(f"\nThere are {len(movies.keys())} movies currently in the PopcornPicker library.")
         for movie, details in movies.items():
             print(Fore.CYAN + movie)
             print(f"\thas a rating of {Fore.YELLOW}{details['rating']}")
@@ -199,7 +191,7 @@ class MovieApp:
         """
         movies = self._storage.list_movies()
         try:
-            movie_to_add = input(Fore.LIGHTGREEN_EX + "What Movie would you like to add to the RateFlix library?\n>>> ")
+            movie_to_add = input(Fore.LIGHTGREEN_EX + "What Movie would you like to add to the PopcornPicker library?\n>>> ")
             if not movie_to_add:
                 raise ValueError("You didn't type a movie name")
 
@@ -210,7 +202,7 @@ class MovieApp:
                 return
             movie_to_add, movie_rating, movie_year, movie_poster = self.api_extraction(movie_to_add, api_key, OMDb_url)
             self._storage.add_movie(movie_to_add, movie_rating, movie_year, movie_poster)
-            print(f"{movie_to_add} successfully added to the RateFlix Library. "
+            print(f"{movie_to_add} successfully added to the PopcornPicker Library. "
                   f"Released in {movie_year} it has a imdb rating of {movie_rating}")
         except Exception as e:
             print(f"Error occurred: {e}")
@@ -229,9 +221,9 @@ class MovieApp:
         try:
             if movie_to_delete in movies:
                 self._storage.delete_movie(movie_to_delete)
-                print(f"{Fore.YELLOW}{movie_to_delete}{Fore.RESET} was deleted from the RateFlix library.")
+                print(f"{Fore.YELLOW}{movie_to_delete}{Fore.RESET} was deleted from the PopcornPicker library.")
             else:
-                print(f"{Fore.YELLOW}{movie_to_delete}{Fore.RESET} is not in the RateFlix library.")
+                print(f"{Fore.YELLOW}{movie_to_delete}{Fore.RESET} is not in the PopcornPicker library.")
         except Exception as e:
             logging.error(e)
             print(f"{Fore.RED + Back.BLACK}Oh oh! Something went wrong.\nError message: {e}")
@@ -376,7 +368,7 @@ class MovieApp:
         plt.show()
 
     def exit_program(self):
-        print("Thanks for using the RateFlix app!")
+        print("Thanks for using the PopcornPicker app!")
         print("Have a wonderful day")
         print(r""" 
             ____             _ 
@@ -500,12 +492,12 @@ class MovieApp:
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" href="style.css"/>
-            <title>RateFlix</title>
+            <title>PopcornPicker</title>
         </head>
         <body>
         <main>
             <div class="list-movies-title">
-                <h1>RateFlix Movie Library</h1>
+                <h1>PopcornPicker Movie Library</h1>
             </div>
             <div class="list">
         """
