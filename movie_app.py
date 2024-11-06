@@ -3,6 +3,7 @@ import os
 import time
 from os.path import join
 
+import pycountry
 from fuzzywuzzy import process
 import Levenshtein
 import matplotlib.pyplot as plt
@@ -225,8 +226,8 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
                                   "Taking you back to the main menu")
                 self.returner_func()
                 return
-            movie_to_add, movie_rating, movie_year, movie_poster = self.api_extraction(movie_to_add, api_key, OMDb_url)
-            self._storage.add_movie(movie_to_add, movie_rating, movie_year, movie_poster)
+            movie_to_add, movie_rating, movie_year, movie_poster, imdb_full_link, country = self.api_extraction(movie_to_add, api_key, OMDb_url)
+            self._storage.add_movie(movie_to_add, movie_rating, movie_year, movie_poster, imdb_full_link, country)
             print(f"{movie_to_add} successfully added to the PopcornPicker Library. "
                   f"Released in {movie_year} it has a imdb rating of {movie_rating}")
         except Exception as e:
@@ -498,7 +499,10 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
             rating = movie_info["imdbRating"]
             year = movie_info["Year"]
             poster_url = movie_info["Poster"]
-            return movie, rating, year, poster_url
+            imdb_id = movie_info["imdbID"]
+            imdb_full_link = f"https://www.imdb.com/title/{imdb_id}/"
+            country = movie_info["Country"]
+            return movie, rating, year, poster_url, imdb_full_link, country
         except HTTPError as e:
             print(f"HTTP error occurred: {e} - Status Code: {response.status_code}")
         except ConnectionError as e:
@@ -528,9 +532,15 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
         """
         # add all movies to html list
         for title, details in movies.items():
+            country_code = self.get_country_code_from_name(details.get('country'))
             html_content += f"""
                 <div class="movie">
-                    <img class="movie-poster" src="{details.get("poster")}">
+                    <a href="{details.get("imdbID")}" target="_blank">
+                        <div class="flag-container">
+                            <img class="country-flag" src="https://flagsapi.com/{country_code}/flat/64.png" alt="{details.get('country')} Flag">
+                        </div>
+                            <img class="movie-poster" src="{details.get("poster")}">
+                    </a>
                     <div class="text">
                         <div class="movie-title">{title}</div>
                         <div class="movie-year">{details.get("year")}</div>
@@ -554,3 +564,23 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
         print("Website was generated successfully")
         time.sleep(2)
 
+    def get_country_code_from_name(self, country):
+        if country and "," in country:
+            countries = [c.strip() for c in country.split(",")]
+            country_codes = []
+            for country in countries:
+                try:
+                    country_objects = pycountry.countries.lookup(country)
+                    country_codes.append(country_objects.alpha_2)
+                except LookupError:
+                    pass
+            return country_codes[0]  # change later to show all flags
+        elif country:
+            try:
+                country = pycountry.countries.lookup(country)
+                return country.alpha_2
+            except LookupError as e:
+                print(f"LookupError: {e}")
+                return None
+        else:
+            return None

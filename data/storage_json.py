@@ -41,12 +41,14 @@ class StorageJson(IStorage):
             movies[title]["note"] = note
             self._save_movies(movies)
 
-    def add_movie(self, title: str, rating: float, year: int, poster: str):
+    def add_movie(self, title: str, rating: float, year: int, poster: str, imdbID: str, country: str):
         """Reads the json file adds a movie into the correct format and then saves the json file"""
         movies = self.list_movies()
         movies[title] = {"rating": rating,
                          "year": year,
-                         "poster": poster
+                         "poster": poster,
+                         "imdbID": imdbID,
+                         "country": country,
                          }
         # save back to file
         self._save_movies(movies)

@@ -49,6 +49,22 @@ body{
     filter: brightness(1);
     transform: translateZ(200px);
 }
+/* movie country flag */
+.flag-container {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 24px;
+    height: 16px;
+    z-index: 10;
+}
+
+.country-flag {
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.5);
+}
 
 /* writing overlay */
 .movie .text {

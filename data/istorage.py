@@ -14,7 +14,7 @@ class IStorage(ABC):
         pass
 
     @abstractmethod
-    def add_movie(self, title, year, rating, poster):
+    def add_movie(self, title, year, rating, poster, imdbID, country):
         """
         add a movie into the RateFlix app database
         :return:

@@ -42,7 +42,9 @@ class StorageCSV(IStorage):
                         "rating": row["rating"],
                         "year": row["year"],
                         "poster": row["poster"],
-                        "note": row["note"]
+                        "note": row["note"],
+                        "imdbID": row["imdbID"],
+                        "country": row["country"]
                     }
         except FileNotFoundError:
             pass
@@ -55,25 +57,27 @@ class StorageCSV(IStorage):
             movies[title]["note"] = note
             self._save_movies(movies)
 
-    def add_movie(self, title: str, rating: float, year: int, poster: str):
+    def add_movie(self, title: str, rating: float, year: int, poster: str, imdbID: str, country: str):
         """
         Adds a new movie to the csv file! if the file doesn't exist it will create the file.
-        :param title:
-        :param rating:
-        :param year:
-        :param poster:
-        :return:
         """
         file_exists = os.path.isfile(self.file_path)
 
         with open(self.file_path, mode="a", newline="") as csv_file:
-            fieldnames = ["title", "rating", "year", "poster"]
+            fieldnames = ["title", "rating", "year", "poster", "imdbID", "country"]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
 
             if not file_exists:
                 writer.writeheader()
 
-            writer.writerow({"title": title, "rating": rating, "year": year, "poster": poster})
+            writer.writerow({
+                "title": title,
+                "rating": rating,
+                "year": year,
+                "poster": poster,
+                "imdbID": imdbID,
+                "country": country
+            })
 
     def delete_movie(self, title: str):
         movies = self.list_movies()
@@ -84,7 +88,7 @@ class StorageCSV(IStorage):
 
     def _save_movies(self, movies: dict):
         with open(self.file_path, mode="w", newline="") as csv_file:
-            fieldnames = ["title", "rating", "year", "poster"]
+            fieldnames = ["title", "rating", "year", "poster", "note", "imdbID", "country"]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader()
             for title, info in movies.items():
@@ -93,7 +97,9 @@ class StorageCSV(IStorage):
                     "rating": info["rating"],
                     "year": info["year"],
                     "poster": info["poster"],
-                    "note": info["note"]
+                    "note": info["note"],
+                    "imdbID": info["imdbID"],
+                    "country": info["country"],
                 })
 
 

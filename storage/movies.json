@@ -1,89 +1,135 @@
 {
-    "Toy Story": {
-        "rating": "8.3",
-        "year": "1995",
-        "poster": "https://m.media-amazon.com/images/M/MV5BZTA3OWVjOWItNjE1NS00NzZiLWE1MjgtZDZhMWI1ZTlkNzYwXkEyXkFqcGc@._V1_SX300.jpg"
+    "Superman": {
+        "rating": "7.4",
+        "year": "1978",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMzFlZDJjMDAtZDYxZS00NzZhLTk2ODMtZWRlODA3Njk3ZTdmXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0078346/",
+        "country": "United States, United Kingdom, Switzerland, Panama"
     },
-    "Toy Story 2": {
-        "rating": "7.9",
-        "year": "1999",
-        "poster": "https://m.media-amazon.com/images/M/MV5BNzVmODlhMDEtY2YxZi00OTVjLTlkNTktN2Q2OTRlM2I4M2FhXkEyXkFqcGc@._V1_SX300.jpg"
-    },
-    "Pulp Fiction": {
-        "rating": "8.9",
-        "year": "1994",
-        "poster": "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg"
-    },
-    "Batman": {
-        "rating": "7.5",
-        "year": "1989",
-        "poster": "https://m.media-amazon.com/images/M/MV5BYzZmZWViM2EtNzhlMi00NzBlLWE0MWEtZDFjMjk3YjIyNTBhXkEyXkFqcGc@._V1_SX300.jpg"
-    },
-    "Lauf um Dein Leben - Vom Junkie zum Ironman": {
-        "rating": "6.0",
-        "year": "2008",
-        "poster": "https://m.media-amazon.com/images/M/MV5BYzA3YjNjZDAtYWU2MC00YmIyLTkzMjEtOGE5YmIyZmYxODIzXkEyXkFqcGc@._V1_SX300.jpg"
-    },
-    "Iron Man": {
-        "rating": "7.9",
-        "year": "2008",
-        "poster": "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SX300.jpg"
-    },
-    "Beetlejuice": {
-        "rating": "7.5",
-        "year": "1988",
-        "poster": "https://m.media-amazon.com/images/M/MV5BYjkwNzVlNDEtMTJlNy00OTdlLTljYWItM2RkZmZkYzY3YjM2XkEyXkFqcGc@._V1_SX300.jpg",
-        "note": "Thats my Favourite Movie :P"
-    },
-    "Terminator": {
+    "Superman Returns": {
         "rating": "6.1",
-        "year": "1991",
-        "poster": "N/A"
+        "year": "2006",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMjg1ZGRiMTEtYmU4Zi00NTkwLWJmODQtMjU3MTAyMGQ2OGZlXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0348150/",
+        "country": "United States, Australia"
     },
-    "Speed": {
+    "The Incredibles": {
+        "rating": "8.0",
+        "year": "2004",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMTY5OTU0OTc2NV5BMl5BanBnXkFtZTcwMzU4MDcyMQ@@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0317705/",
+        "country": "United States"
+    },
+    "100 Things": {
+        "rating": "6.3",
+        "year": "2018",
+        "poster": "https://m.media-amazon.com/images/M/MV5BZjQ0NmU3YjUtYjhhZi00NmFjLTlmZTEtMjcxZjU5ODliZjAwXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt8129794/",
+        "country": "Germany"
+    },
+    "Mask": {
+        "rating": "7.2",
+        "year": "1985",
+        "poster": "https://m.media-amazon.com/images/M/MV5BNzU1ZDFkYjAtZGMzNC00MjJjLWI5ZjQtZTE4Y2QzOWVhNjcxXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0089560/",
+        "country": "United States"
+    },
+    "The Mask": {
+        "rating": "6.9",
+        "year": "1994",
+        "poster": "https://m.media-amazon.com/images/M/MV5BNGNmNjI0ZmMtMzI5MC00ZjUyLWFlZDEtYjUyMGZlN2E3N2E2XkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0110475/",
+        "country": "United States"
+    },
+    "Dumb and Dumber": {
         "rating": "7.3",
         "year": "1994",
-        "poster": "https://m.media-amazon.com/images/M/MV5BMDc2ODI5YWQtMmM2ZS00MTdmLWEyNWEtNmRmOGE5NGZlYWMzXkEyXkFqcGc@._V1_SX300.jpg"
-    },
-    "The Dark Knight": {
-        "rating": "9.0",
-        "year": "2008",
-        "poster": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg"
-    },
-    "The Godfather Part II": {
-        "rating": "9.0",
-        "year": "1974",
-        "poster": "https://m.media-amazon.com/images/M/MV5BNzc1OWY5MjktZDllMi00ZDEzLWEwMGItYjk1YmRhYjBjNTVlXkEyXkFqcGc@._V1_SX300.jpg"
-    },
-    "The Shawshank Redemption": {
-        "rating": "9.3",
-        "year": "1994",
-        "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX300.jpg"
-    },
-    "Fight Club": {
-        "rating": "8.8",
-        "year": "1999",
-        "poster": "https://m.media-amazon.com/images/M/MV5BOTgyOGQ1NDItNGU3Ny00MjU3LTg2YWEtNmEyYjBiMjI1Y2M5XkEyXkFqcGc@._V1_SX300.jpg"
-    },
-    "Forrest Gump": {
-        "rating": "8.8",
-        "year": "1994",
-        "poster": "https://m.media-amazon.com/images/M/MV5BNDYwNzVjMTItZmU5YS00YjQ5LTljYjgtMjY2NDVmYWMyNWFmXkEyXkFqcGc@._V1_SX300.jpg"
-    },
-    "Titanic": {
-        "rating": "7.9",
-        "year": "1997",
-        "poster": "https://m.media-amazon.com/images/M/MV5BYzYyN2FiZmUtYWYzMy00MzViLWJkZTMtOGY1ZjgzNWMwN2YxXkEyXkFqcGc@._V1_SX300.jpg"
-    },
-    "Star Wars: Episode IV - A New Hope": {
-        "rating": "8.6",
-        "year": "1977",
-        "poster": "https://m.media-amazon.com/images/M/MV5BOGUwMDk0Y2MtNjBlNi00NmRiLTk2MWYtMGMyMDlhYmI4ZDBjXkEyXkFqcGc@._V1_SX300.jpg"
+        "poster": "https://m.media-amazon.com/images/M/MV5BNGQxZDA1MmMtYWQ1Ni00NTJmLTljMjgtZWVmODllODVhMzgyXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0109686/",
+        "country": "United States"
     },
     "Spaceballs": {
         "rating": "7.1",
         "year": "1987",
         "poster": "https://m.media-amazon.com/images/M/MV5BZWNhNWM3NWQtNTMwNy00NThiLWFkZDYtYzBlZTQyZGU2YzE1XkEyXkFqcGc@._V1_SX300.jpg",
-        "note": "I Love this Movie"
+        "imdbID": "https://www.imdb.com/title/tt0094012/",
+        "country": "United States"
+    },
+    "Saving Private Ryan": {
+        "rating": "8.6",
+        "year": "1998",
+        "poster": "https://m.media-amazon.com/images/M/MV5BZGZhZGQ1ZWUtZTZjYS00MDJhLWFkYjctN2ZlYjE5NWYwZDM2XkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0120815/",
+        "country": "United States"
+    },
+    "Hubert und Staller - Unter W\u00f6lfen": {
+        "rating": "6.9",
+        "year": "2016",
+        "poster": "https://m.media-amazon.com/images/M/MV5BODMzMmE0MDYtNjE3ZS00MzhmLWE4ZDUtODlhMjRkZDk3OGI5XkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt4626906/",
+        "country": "Germany"
+    },
+    "Jumanji": {
+        "rating": "7.1",
+        "year": "1995",
+        "poster": "https://m.media-amazon.com/images/M/MV5BYTFkMjFmODgtYzRiZi00NmQwLTliZWMtMzRhMWQ5ZmY3ZDExXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0113497/",
+        "country": "United States"
+    },
+    "John Wick": {
+        "rating": "7.4",
+        "year": "2014",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt2911666/",
+        "country": "United States"
+    },
+    "King Arthur": {
+        "rating": "6.3",
+        "year": "2004",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMTk4MTk1NjI0OV5BMl5BanBnXkFtZTcwNDQxOTUyMQ@@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0349683/",
+        "country": "Ireland, United Kingdom, United States"
+    },
+    "Hot Dog": {
+        "rating": "5.9",
+        "year": "2013",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMmZmNDQwYjAtOGZlMy00YmMwLThjZTAtOTc0YTYyY2FmOTllXkEyXkFqcGdeQXVyNDI0NjM3MDE@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt3013930/",
+        "country": "Canada"
+    },
+    "The Most Beautiful Day": {
+        "rating": "6.4",
+        "year": "2016",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMTUwMzE5MzcxOF5BMl5BanBnXkFtZTgwMTQxMTE5NzE@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt5154896/",
+        "country": "Germany"
+    },
+    "Mortal Kombat": {
+        "rating": "6.0",
+        "year": "2021",
+        "poster": "https://m.media-amazon.com/images/M/MV5BNmRmN2I5M2EtNDA1Ny00N2ZmLWE3YWYtMjQ1NTFjY2Q4NWM5XkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0293429/",
+        "country": "United States"
+    },
+    "Deadpool": {
+        "rating": "8.0",
+        "year": "2016",
+        "poster": "https://m.media-amazon.com/images/M/MV5BNzY3ZWU5NGQtOTViNC00ZWVmLTliNjAtNzViNzlkZWQ4YzQ4XkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt1431045/",
+        "country": "United States"
+    },
+    "Green Street Hooligans": {
+        "rating": "7.4",
+        "year": "2005",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMjExNTg3NzYwMV5BMl5BanBnXkFtZTcwMzcxMTEzMQ@@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0385002/",
+        "country": "United Kingdom, United States"
+    },
+    "47 Ronin": {
+        "rating": "6.2",
+        "year": "2013",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMTc0MjE2NzE0OV5BMl5BanBnXkFtZTgwNTU5MjE1MDE@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt1335975/",
+        "country": "United States, United Kingdom, Japan, Hungary"
     }
 }
