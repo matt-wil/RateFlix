@@ -8,7 +8,7 @@ class IStorage(ABC):
     @abstractmethod
     def list_movies(self):
         """
-        list all movies in the RateFlix app
+        list all movies in the app
         :return:
         """
         pass
@@ -16,7 +16,7 @@ class IStorage(ABC):
     @abstractmethod
     def add_movie(self, title, year, rating, poster, imdbID, country):
         """
-        add a movie into the RateFlix app database
+        add a movie into the app database
         :return:
         """
         pass
@@ -24,7 +24,7 @@ class IStorage(ABC):
     @abstractmethod
     def delete_movie(self, title):
         """
-        delete a movie from the RateFlix app database
+        delete a movie from the app database
         :return:
         """
         pass
@@ -32,7 +32,7 @@ class IStorage(ABC):
     @abstractmethod
     def update_movie(self, title, note):
         """
-        update a movie that is currently in the RateFlix app database
+        update a movie that is currently in the app database
         :return:
         """
         pass

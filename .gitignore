@@ -2,6 +2,8 @@
 old_app
 playground.py
 plan.txt
+logs
+storage
 
 # Template
 
@@ -53,7 +55,8 @@ env/
 data/*.json
 data/*.csv
 *.db
-
+model/*.json
+model/*.csv
 # Build and distribution directories
 build/
 dist/
