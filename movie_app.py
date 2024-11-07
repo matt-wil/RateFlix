@@ -1,8 +1,7 @@
-# Welcome to Matt's Epic Movie Dictionary!
 import os
 import time
 from os.path import join
-
+import utilities
 import pycountry
 from fuzzywuzzy import process
 import Levenshtein
@@ -12,6 +11,7 @@ import sys
 from colorama import Fore, Style, Back, init
 import requests
 from requests.exceptions import HTTPError, ConnectionError, Timeout, RequestException
+import logging_handler
 init(autoreset=True)
 
 # access environment variable for api_key
@@ -19,15 +19,6 @@ from dotenv import load_dotenv
 load_dotenv()
 api_key = os.getenv("API_KEY")
 OMDb_url = "http://www.omdbapi.com/?apikey="
-
-# Error Logs
-import logging
-logging.basicConfig(
-    level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s', handlers=[
-        logging.FileHandler('logs/app_errors.log'),
-        logging.StreamHandler()
-    ]
-)
 
 
 class MovieApp:
@@ -78,101 +69,6 @@ class MovieApp:
         """
         self._storage = storage
 
-    def welcome_page(self):
-        """
-        my little welcome to my app message!
-        :return: Print statement
-        """
-
-        def lazy_print(text, step=50):
-            for char in text:
-                print(char, end="", flush=True)
-                time.sleep(step / 1000)
-
-        ascii_title = r"""
-____    __    ____  _______  __        ______   ______   .___  ___.  _______ 
-\   \  /  \  /   / |   ____||  |      /      | /  __  \  |   \/   | |   ____|
- \   \/    \/   /  |  |__   |  |     |  ,----'|  |  |  | |  \  /  | |  |__   
-  \            /   |   __|  |  |     |  |     |  |  |  | |  |\/|  | |   __|  
-   \    /\    /    |  |____ |  `----.|  `----.|  `--'  | |  |  |  | |  |____ 
-    \__/  \__/     |_______||_______| \______| \______/  |__|  |__| |_______|
-                                                                             
-.___________.  ______                                                        
-|           | /  __  \                                                       
-`---|  |----`|  |  |  |                                                      
-    |  |     |  |  |  |                                                      
-    |  |     |  `--'  |                                                      
-    |__|      \______/                                                       
-                                                                             
-.______     ______   .______     ______   ______   .______      .__   __.    
-|   _  \   /  __  \  |   _  \   /      | /  __  \  |   _  \     |  \ |  |    
-|  |_)  | |  |  |  | |  |_)  | |  ,----'|  |  |  | |  |_)  |    |   \|  |    
-|   ___/  |  |  |  | |   ___/  |  |     |  |  |  | |      /     |  . `  |    
-|  |      |  `--'  | |  |      |  `----.|  `--'  | |  |\  \----.|  |\   |    
-| _|       \______/  | _|       \______| \______/  | _| `._____||__| \__|    
-                                                                             
-.______    __    ______  __  ___  _______ .______                            
-|   _  \  |  |  /      ||  |/  / |   ____||   _  \                           
-|  |_)  | |  | |  ,----'|  '  /  |  |__   |  |_)  |                          
-|   ___/  |  | |  |     |    <   |   __|  |      /                           
-|  |      |  | |  `----.|  .  \  |  |____ |  |\  \----.                      
-| _|      |__|  \______||__|\__\ |_______|| _| `._____|                      
-     """
-        lazy_print(ascii_title, step=3)
-        time.sleep(2)
-
-    def main_menu(self):
-        """
-        Printing the menu options and running the user input for the menu with a While, try, except and if statement.
-        Asking for the user input and making sure its only digits between 1-9.
-        :return: Integer -- user_menu_input
-        """
-        while True:
-            print()
-            print(Fore.CYAN + Style.BRIGHT + "Lets check out the menu!")
-            print()
-            print(Fore.LIGHTWHITE_EX + "Menu:")
-            print(Fore.RED + "0. Exit")
-            print(Fore.LIGHTWHITE_EX + "1. List Movies")
-            print(Fore.LIGHTWHITE_EX + "2. Add Movie")
-            print(Fore.LIGHTWHITE_EX + "3. Delete Movie")
-            print(Fore.LIGHTWHITE_EX + "4. Update Movie Note")
-            print(Fore.LIGHTWHITE_EX + "5. Stats")
-            print(Fore.LIGHTWHITE_EX + "6. Random Movie")
-            print(Fore.LIGHTWHITE_EX + "7. Search Movie")
-            print(Fore.LIGHTWHITE_EX + "8. Movies Sorted by Rating")
-            print(Fore.LIGHTWHITE_EX + "9. Create a Histogram")
-            print(Fore.LIGHTWHITE_EX + "10. Movies Sorted by Chronological Order")
-            print(Fore.LIGHTWHITE_EX + "11. Filter Movies")
-            print(Fore.LIGHTWHITE_EX + "12. Generate Website")
-            print()
-
-            user_menu_input = input(Fore.LIGHTGREEN_EX + "Enter choice (0-12): \n >>> ")
-
-            if user_menu_input.strip() == "":
-                print(Fore.MAGENTA + "You forget to enter a menu number!")
-                continue
-
-            try:
-                user_menu_input = int(user_menu_input)
-                if 0 <= user_menu_input <= 12:
-                    return user_menu_input
-                else:
-                    print(Fore.MAGENTA + "Please enter a number between 0-12")
-
-            except ValueError:
-                print(Fore.MAGENTA + "Enter only numbers please!")
-            except Exception as e:
-                logging.error(e)
-                print(f"{Fore.RED + Back.BLACK}Something went wrong! \n Error message: {e}")
-
-    def returner_func(self):
-        """
-        This function will play after every finished menu option in order for the user to press enter and return to menu.
-        :return: User input 'ENTER' key.
-        """
-        input(Fore.CYAN + Style.BRIGHT + "Please press enter to return to the main menu!")
-
     def list_movies(self):
         """
         this function will print a list of every movie in the Dictionary of movies.
@@ -185,7 +81,7 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
             print(Fore.CYAN + movie)
             print(f"\thas a rating of {Fore.YELLOW}{details['rating']}")
             print(f"\twas released in {Fore.YELLOW}{details['year']}\n")
-        self.returner_func()
+        utilities.returner_func()
 
     def update_movie(self):
         """
@@ -201,13 +97,13 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
             if notes.strip():
                 self._storage.update_movie(update_movie_name, notes)
                 print("Note successfully added!")
-                self.returner_func()
+                utilities.returner_func()
             else:
                 print("Please enter a Valid note")
                 time.sleep(2)
         else:
             print("Movie not in the Library")
-            self.returner_func()
+            utilities.returner_func()
             
     def add_movie(self):
         """
@@ -224,7 +120,7 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
             if movie_to_add in movies:
                 print(Fore.CYAN + "Movie is already in the Library.\n"
                                   "Taking you back to the main menu")
-                self.returner_func()
+                utilities.returner_func()
                 return
             movie_to_add, movie_rating, movie_year, movie_poster, imdb_full_link, country = self.api_extraction(movie_to_add, api_key, OMDb_url)
             self._storage.add_movie(movie_to_add, movie_rating, movie_year, movie_poster, imdb_full_link, country)
@@ -233,7 +129,7 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
         except Exception as e:
             print(f"Error occurred: {e}")
 
-        self.returner_func()
+        utilities.returner_func()
 
     def delete_movie(self):
         """
@@ -251,9 +147,9 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
             else:
                 print(f"{Fore.YELLOW}{movie_to_delete}{Fore.RESET} is not in the PopcornPicker library.")
         except Exception as e:
-            logging.error(e)
+            logging_handler.logging.error(e)
             print(f"{Fore.RED + Back.BLACK}Oh oh! Something went wrong.\nError message: {e}")
-        self.returner_func()
+        utilities.returner_func()
 
     def stats(self):
         """
@@ -296,7 +192,7 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
         for movie in lowest_rated_movies:
             print(f"\t{Fore.YELLOW}{movie}{Fore.RESET} - Rating: {Fore.YELLOW}{lowest_rating}")
 
-        self.returner_func()
+        utilities.returner_func()
 
     def random_movie(self):
         """
@@ -307,7 +203,7 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
         the_random_movie, val = random.choice(list(movies.items()))
         print(
             f"Random movie is: {Fore.YELLOW}{the_random_movie}{Fore.RESET}, released in {Fore.YELLOW}{val["year"]}{Fore.RESET} with a rating of {Fore.YELLOW}{val["rating"]}")
-        self.returner_func()
+        utilities.returner_func()
 
     def search_movie(self):
         """
@@ -325,7 +221,7 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
             exact_search = lower_movies[search_item]
             print(
                 f"{Fore.YELLOW}{exact_search.capitalize()}{Fore.RESET}, released in {Fore.YELLOW}{movies[exact_search]["year"]}{Fore.RESET} has a rating of {Fore.YELLOW}{movies[exact_search]["rating"]}")
-            self.returner_func()
+            utilities.returner_func()
 
         # Fuzzy matching
         movies_list = list(movies.keys())
@@ -355,7 +251,7 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
                         f"{Fore.YELLOW}{title}{Fore.RESET} released in {Fore.YELLOW}{movies[title]["year"]}{Fore.RESET} has a rating of {Fore.YELLOW}{movies[title]}")
             else:
                 print(Fore.RED + "No movies found matching your search.")
-        self.returner_func()
+        utilities.returner_func()
 
     def movies_sorted_by_rating(self):
         """
@@ -370,7 +266,7 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
         for movie, details in sorted_movies.items():
             print(
                 f"{Fore.YELLOW}{movie}{Fore.RESET}: Rating: {Fore.YELLOW}{details["rating"]}{Fore.RESET}, Year: {Fore.YELLOW}{details["year"]}")
-        self.returner_func()
+        utilities.returner_func()
 
     def create_histogram_and_save(self):
         """
@@ -393,7 +289,8 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
 
         plt.show()
 
-    def exit_program(self):
+    @staticmethod
+    def exit_program():
         print("Thanks for using the PopcornPicker app!")
         print("Have a wonderful day")
         print(r""" 
@@ -432,7 +329,7 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
         for movie, details in sorted_movies.items():
             print(
                 f"{Fore.YELLOW}{movie}{Fore.RESET}: Rating: {Fore.YELLOW}{details["rating"]}{Fore.RESET}, Year: {Fore.YELLOW}{details["year"]}")
-        self.returner_func()
+        utilities.returner_func()
 
     def filter_movies(self):
         """
@@ -480,16 +377,18 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
                 print(Fore.YELLOW + movie)
         else:
             print(Fore.RED + "No movies found matching the criteria")
-        self.returner_func()
+        utilities.returner_func()
 
-    def api_extraction(self, title, api, url, search_type="&t="):
+    @staticmethod
+    def api_extraction(title, api, url, search_type="&t="):
         """
-        searches the OMDb database for given Title movie and returns the movie title, rating, year and poster URL
+        searches the OMDb database for given Title movie
+        returns the movie title, rating, year, poster URL, imdb_full_link, country
         :param title: (str)
         :param api: (str) Api key for OMDb
         :param url: (str) Url for OMDb
         :param search_type: (str) search type keyword set for Movie title search
-        :return: movie name, movie rating, movie year of release and the Poster URL
+        :return: movie name, movie rating, movie year of release, the Poster URL, imdb full website link and the country
         """
         try:
             response = requests.get(url + api + search_type + title)
@@ -564,7 +463,14 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______
         print("Website was generated successfully")
         time.sleep(2)
 
-    def get_country_code_from_name(self, country):
+    @staticmethod
+    def get_country_code_from_name(country):
+        """
+        Receives a string containing 1 or more country names.
+        Takes the names and returns the country codes for the names e.g. Australia = AU
+        :param country: (str) country name/s
+        :return: (str) country code
+        """
         if country and "," in country:
             countries = [c.strip() for c in country.split(",")]
             country_codes = []

@@ -3,6 +3,7 @@ import os
 from movie_app import MovieApp
 from data.storage_json import StorageJson
 from data.storage_csv import StorageCSV
+import utilities
 
 
 class MovieApplicationRun:
@@ -30,11 +31,11 @@ class MovieApplicationRun:
         }
 
     def run(self):
-        self.app.welcome_page()
+        utilities.welcome_page()
         while True:
-            user_input = self.app.main_menu()
+            user_input = utilities.main_menu()
             # Call the corresponding function or return if not valid
-            func = self.menu_options.get(user_input, self.app.returner_func)
+            func = self.menu_options.get(user_input, utilities.returner_func)
             func()
 
 
