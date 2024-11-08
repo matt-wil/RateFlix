@@ -1,4 +1,4 @@
-from userinterfaces.Base_UI import BaseUI
+from view.Base_UI import BaseUI
 
 
 class MovieAppStreamlitUI(BaseUI):

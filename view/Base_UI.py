@@ -21,6 +21,14 @@ class BaseUI(ABC):
     for the Movie App to run in.
     """
     @abstractmethod
+    def welcome_page(self):
+        pass
+
+    @abstractmethod
+    def main_menu(self):
+        pass
+
+    @abstractmethod
     def display_all(self):
         pass
 

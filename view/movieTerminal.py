@@ -1,51 +1,40 @@
 import utilities
 from colorama import Fore, Style, Back
-from userinterfaces.Base_UI import BaseUI
+from view.Base_UI import BaseUI
 import time
+import logs.logging_handler
 
 
 class MovieAppTerminalUI(BaseUI):
-    def __init__(self, app_functionality):
-        self.app_functionality = app_functionality
-        self.movies = self.app_functionality.list_movies()
+    def __init__(self, presenter):
+        self.presenter = presenter
+        self.movies = self.presenter.list_movies()
+
+    def welcome_page(self):
+        utilities.welcome_page()
+
+    def main_menu(self):
+        utilities.main_menu()
 
     def display_all(self):
-        """
-        receive a dictionary of movies in the storage
-        displays the name, imdb rating, the year of release and notes if a movie has some.
-        :return:
-        """
-        print(f"\nThere are {len(self.movies.keys())} movies currently in the PopcornPicker library.")
-        for movie, details in self.movies.items():
-            print(Fore.CYAN + movie)
-            print(f"\thas a rating of {Fore.YELLOW}{details['rating']}")
-            print(f"\twas released in {Fore.YELLOW}{details['year']}\n")
-        utilities.returner_func()
+        utilities.display_all(self.movies)
 
     def add(self):
-        try:
-            movie_to_add = input(
-                Fore.LIGHTGREEN_EX + "What Movie would you like to add to the PopcornPicker library?\n>>> ")
-            if not movie_to_add:
-                raise ValueError("You didn't type a movie name")
-
-            if movie_to_add in movies:
-                print(Fore.CYAN + "Movie is already in the Library.\n"
-                                  "Taking you back to the main menu")
-                utilities.returner_func()
-                return
-            movie_to_add, movie_rating, movie_year, movie_poster, imdb_full_link, country = self.api_extraction(
-                movie_to_add, api_key, OMDb_url)
-            self._storage.add_movie(movie_to_add, movie_rating, movie_year, movie_poster, imdb_full_link, country)
-            print(f"{movie_to_add} successfully added to the PopcornPicker Library. "
-                  f"Released in {movie_year} it has a imdb rating of {movie_rating}")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-
-        utilities.returner_func()
+        utilities.add(self.movies, self._storage)
 
     def delete(self):
-        pass
+        movies = self._storage.list_movies()
+        movie_to_delete = input(Fore.LIGHTGREEN_EX + "Enter the movie you would like to delete: \n >>> ")
+        try:
+            if movie_to_delete in movies:
+                self._storage.delete_movie(movie_to_delete)
+                print(f"{Fore.YELLOW}{movie_to_delete}{Fore.RESET} was deleted from the PopcornPicker library.")
+            else:
+                print(f"{Fore.YELLOW}{movie_to_delete}{Fore.RESET} is not in the PopcornPicker library.")
+        except Exception as e:
+            logs.logging_handler.logging.error(e)
+            print(f"{Fore.RED + Back.BLACK}Oh oh! Something went wrong.\nError message: {e}")
+        utilities.returner_func()
 
     def update(self):
         update_movie_name = input(

@@ -1,9 +1,9 @@
 import argparse
-import os
-from movie_app import MovieApp
-from data.storage_json import StorageJson
-from data.storage_csv import StorageCSV
+from old_app.movie_app import MovieApp
+from model.storage_json import StorageJson
+from model.storage_csv import StorageCSV
 import utilities
+import command_line_args
 
 
 class MovieApplicationRun:
@@ -39,19 +39,6 @@ class MovieApplicationRun:
             func()
 
 
-def determine_storage_type(file_path: str) -> str:
-    """determine the storage type based on the file extension"""
-    _, extension = os.path.splitext(file_path)
-    extension = extension.lower()
-
-    if extension == ".json":
-        return "json"
-    elif extension == ".csv":
-        return "csv"
-    else:
-        raise ValueError("Unsupported file type. At this time we only support .json and .csv files.")
-
-
 def main():
     # set up argument parsing
     parser = argparse.ArgumentParser(description="Run the movie application with a specified storage file.")
@@ -62,7 +49,7 @@ def main():
 
     # determine storage type via file extension
     try:
-        storage_type = determine_storage_type(args.storage_file)
+        storage_type = command_line_args.determine_storage_type(args.storage_file)
     except ValueError as e:
         print(f"Error: {e}")
         return

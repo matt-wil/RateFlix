@@ -1,5 +1,5 @@
 from os.path import join
-from data.istorage import IStorage
+from model.istorage import IStorage
 import json
 
 
