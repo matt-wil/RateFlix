@@ -104,19 +104,6 @@ def returner_func():
     input(Fore.CYAN + Style.BRIGHT + "Please press enter to return to the main menu!")
 
 
-def display_all(movies):
-    """
-    receive a dictionary of movies in the storage
-    displays the name, imdb rating, the year of release and notes if a movie has some.
-    :return:
-    """
-    print(f"\nThere are {len(movies.keys())} movies currently in the PopcornPicker library.")
-    for movie, details in movies.items():
-        print(Fore.CYAN + movie)
-        print(f"\thas a rating of {Fore.YELLOW}{details['rating']}")
-        print(f"\twas released in {Fore.YELLOW}{details['year']}\n")
-
-
 def add(movies, storage):
     try:
         movie_to_add = input(

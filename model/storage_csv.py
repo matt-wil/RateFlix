@@ -25,7 +25,7 @@ class StorageCSV(IStorage):
                 writes/saves the movies dictionary back to the movies.csv file.
 
         """
-    def __init__(self, file_path=join("storage", "movies.csv")):
+    def __init__(self, file_path=join("model", "movies.csv")):
         self.file_path = file_path
 
     def list_movies(self):

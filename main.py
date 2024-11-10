@@ -1,9 +1,14 @@
 import argparse
-from old_app.movie_app import MovieApp
 from model.storage_json import StorageJson
 from model.storage_csv import StorageCSV
-import utilities
 import command_line_args
+from presenter.movie_crud import MovieCrud
+from presenter.movie_manager import MovieManager
+from presenter.movie_search import MovieSearch
+from presenter.movie_stats import MovieStats
+from presenter.movie_website_generator import WebsiteGenerator
+from view.movieTerminal import MovieAppTerminalUI
+import utilities
 
 
 class MovieApplicationRun:
@@ -12,26 +17,32 @@ class MovieApplicationRun:
             self.storage = StorageCSV()
         else:
             self.storage = StorageJson()
-        self.app = MovieApp(self.storage)
+        view = MovieAppTerminalUI
+        crud = MovieCrud(self.storage)
+        manager = MovieManager(self.storage)
+        stats = MovieStats(self.storage)
+        search = MovieSearch(self.storage, view)
+        website_gen = WebsiteGenerator(self.storage)
+        self.app = MovieAppTerminalUI(crud, manager, stats, search, website_gen)
         # Initialize a dispatcher dictionary
         self.menu_options = {
-            0: self.app.exit_program,
-            1: self.app.list_movies,
-            2: self.app.add_movie,
-            3: self.app.delete_movie,
-            4: self.app.update_movie,
-            5: self.app.stats,
-            6: self.app.random_movie,
-            7: self.app.search_movie,
-            8: self.app.movies_sorted_by_rating,
-            9: self.app.create_histogram_and_save,
-            10: self.app.movies_sorted_by_chronological_order,
-            11: self.app.filter_movies,
+            0: self.app.exit,
+            1: self.app.display_all,
+            2: self.app.add,
+            3: self.app.delete,
+            4: self.app.update,
+            5: self.app.display_stats,
+            6: self.app.display_random,
+            7: self.app.search,
+            8: self.app.display_sorted,
+            9: self.app.create_histogram,
+            10: self.app.display_chronologically,
+            11: self.app.filter,
             12: self.app.generate_website,
         }
 
     def run(self):
-        utilities.welcome_page()
+        # utilities.welcome_page()
         while True:
             user_input = utilities.main_menu()
             # Call the corresponding function or return if not valid
@@ -54,7 +65,7 @@ def main():
         print(f"Error: {e}")
         return
 
-    # run the app
+    # create View
     app = MovieApplicationRun(storage_type=storage_type)
     app.run()
 

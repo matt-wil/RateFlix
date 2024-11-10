@@ -53,7 +53,7 @@ class WebsiteGenerator:
          </html>
          """
 
-        with open(join("../web", "index.html"), "w") as file:
+        with open(join("web", "index.html"), "w") as file:
             file.write(html_content)
 
         print("Website was generated successfully")

@@ -6,7 +6,8 @@ class MovieStats:
         return self._storage.list_movies()
 
     def collect_ratings_float(self):
-        return [float(movie["rating"]) for movie in self._storage.movies.values()]
+        movies = self.movies()
+        return [float(movie["rating"]) for movie in movies.values()]
 
     def calc_avg(self):
         ratings = self.collect_ratings_float()
@@ -38,10 +39,10 @@ class MovieStats:
     def highest_rated_movies(self):
         movies = self.movies()
         highest = self.highest_rating()
-        return [title for title in movies if movies[title]["rating"] == highest]
+        return [title for title, details in movies.items() if float(movies[title]["rating"]) == highest]
 
     def lowest_rated_movies(self):
         movies = self.movies()
         lowest = self.lowest_rating()
-        return [title for title in movies if movies[title]["rating"] == lowest]
+        return [title for title, details in movies.items() if float(movies[title]["rating"]) == lowest]
 

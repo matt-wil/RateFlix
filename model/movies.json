@@ -131,5 +131,27 @@
         "poster": "https://m.media-amazon.com/images/M/MV5BMTc0MjE2NzE0OV5BMl5BanBnXkFtZTgwNTU5MjE1MDE@._V1_SX300.jpg",
         "imdbID": "https://www.imdb.com/title/tt1335975/",
         "country": "United States, United Kingdom, Japan, Hungary"
+    },
+    "Batman": {
+        "rating": "7.5",
+        "year": "1989",
+        "poster": "https://m.media-amazon.com/images/M/MV5BYzZmZWViM2EtNzhlMi00NzBlLWE0MWEtZDFjMjk3YjIyNTBhXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0096895/",
+        "country": "United States, United Kingdom"
+    },
+    "Alita": {
+        "rating": "7.3",
+        "year": "2019",
+        "poster": "https://m.media-amazon.com/images/M/MV5BYmZhZGQzM2MtMWEyZC00YTU1LTk4YTQtMTg3ZjEzM2U1NTkxXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0437086/",
+        "country": "Japan, Canada, United States",
+        "note": "Look forward to the sequel"
+    },
+    "Flash": {
+        "rating": "6.9",
+        "year": "1997",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMTkwNzY4Mzg5N15BMl5BanBnXkFtZTcwNzE4MzEyMQ@@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0136199/",
+        "country": "United States"
     }
 }
