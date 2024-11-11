@@ -17,7 +17,6 @@ if "manager" not in st.session_state:
 st.title("Here we have sorted the movies by rating for you!")
 sorted_movies = st.session_state.manager.sort_by_rating()
 st.title("Movies sorted by rating:")
-rows = len(sorted_movies.keys())
 for movie, details in sorted_movies.items():
     col1, col2 = st.columns(2)
     with col1:
