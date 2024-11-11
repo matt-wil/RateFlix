@@ -39,12 +39,12 @@ class StorageCSV(IStorage):
                 reader = csv.DictReader(csv_file)
                 for row in reader:
                     movies[row["title"]] = {
-                        "rating": row["rating"],
-                        "year": row["year"],
-                        "poster": row["poster"],
-                        "note": row["note"],
-                        "imdbID": row["imdbID"],
-                        "country": row["country"]
+                        "rating": row.get("rating", "N/A"),  # Default value for missing rating
+                        "year": row.get("year", "N/A"),  # Default value for missing year
+                        "poster": row.get("poster", "No Poster Available"),  # Default value for missing poster
+                        "note": row.get("note", "No notes available"),  # Default value for missing note
+                        "imdbID": row.get("imdbID", "Unknown"),  # Default value for missing imdbID
+                        "country": row.get("country", "Unknown")  # Default value for missing country
                     }
         except FileNotFoundError:
             pass

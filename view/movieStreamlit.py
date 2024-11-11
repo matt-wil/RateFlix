@@ -2,7 +2,17 @@ from view.Base_UI import BaseUI
 
 
 class MovieAppStreamlitUI(BaseUI):
-    def __init__(self):
+    def __init__(self, presenter_crud, presenter_manager, presenter_stats, presenter_search, presenter_web_gen):
+        self.presenter_crud = presenter_crud
+        self.presenter_manager = presenter_manager
+        self.presenter_stats = presenter_stats
+        self.presenter_search = presenter_search
+        self.presenter_web_gen = presenter_web_gen
+
+    def welcome_page(self):
+        pass
+
+    def main_menu(self):
         pass
 
     def display_all(self):
@@ -39,4 +49,7 @@ class MovieAppStreamlitUI(BaseUI):
         pass
 
     def generate_website(self):
+        pass
+
+    def exit(self):
         pass

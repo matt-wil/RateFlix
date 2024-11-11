@@ -1,5 +1,5 @@
 import utilities
-from colorama import Fore, Style, Back
+from colorama import Fore
 from view.Base_UI import BaseUI
 
 
