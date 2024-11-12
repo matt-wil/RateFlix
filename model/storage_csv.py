@@ -26,12 +26,21 @@ class StorageCSV(IStorage):
 
         """
     def __init__(self, file_path=join("model", "movies.csv")):
+        """Initialise the object with the CSV filepath"""
         self.file_path = file_path
 
     def list_movies(self):
         """
         reads the movies.csv file and returns a dictionary in the correct format to be worked with.
-        :return: (dict) "title": title, "rating": rating, "year", year
+        :return: (dict)  {"title": {
+                                    "rating": rating,
+                                    "year": year,
+                                    "poster": poster,
+                                    "imdbID": imdbID,
+                                    "country": country,
+                                    "note": note
+                                    }
+                            }
         """
         movies = {}
         try:
@@ -51,8 +60,8 @@ class StorageCSV(IStorage):
         return movies
 
     def update_movie(self, title: str, note: str):
+        """Reads the CSV file and adds in the Note to the dictionary and resaves the file"""
         movies = self.list_movies()
-        # update the movie rating
         if title in movies:
             movies[title]["note"] = note
             self._save_movies(movies)
@@ -81,13 +90,14 @@ class StorageCSV(IStorage):
             })
 
     def delete_movie(self, title: str):
+        """Reads the CSV file and deletes the given movie if in the file then resaves the file"""
         movies = self.list_movies()
-        # delete the movie
         if title in movies:
             del movies[title]
             self._save_movies(movies)
 
     def _save_movies(self, movies: dict):
+        """Saving method to save the CSV file back into the correct storage format"""
         with open(self.file_path, mode="w", newline="") as csv_file:
             fieldnames = ["title", "rating", "year", "poster", "imdbID", "country", "note"]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)

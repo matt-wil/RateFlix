@@ -6,19 +6,63 @@ from datetime import datetime
 
 
 class MovieManager:
+    """
+    A class for managing movies, including operations like sorting, filtering, and creating visualizations.
+
+    Methods:
+        __init__(storage):
+            Initializes the MovieManager with a storage object for movie data.
+
+        random_movie():
+            Returns a random movie from the list of stored movies.
+
+        sort_by_rating():
+            Sorts the movies by rating in descending order and returns the sorted dictionary.
+
+        create_histogram(filename="movies_histogram.png"):
+            Creates and saves a histogram of movie ratings as a PNG file.
+
+        sort_chronologically_latest_first():
+            Sorts the movies by their release year in descending order and returns the sorted dictionary.
+
+        sort_chronologically_earliest_first():
+            Sorts the movies by their release year in ascending order and returns the sorted dictionary.
+
+        filter_movies(min_rating_input, start_year_input, end_year_input):
+            Filters movies based on the provided rating and release year range.
+    """
+
     def __init__(self, storage):
+        """
+        Initializes the MovieManager instance with a storage object for managing movie data.
+        :arg:
+            storage: An instance of a storage class responsible for movie data persistence.
+        """
         self._storage = storage
 
     def random_movie(self):
+        """
+        Returns a random movie from the list of stored movies.
+        :return: (tuple): A tuple containing the movie title and its details (rating, year, etc.).
+        """
         movies = self._storage.list_movies()
         the_random_movie, details = random.choice(list(movies.items()))
         return the_random_movie, details
 
     def sort_by_rating(self):
+        """
+        Sorts the movies by their rating in descending order and returns the sorted dictionary.
+        :return: (dict): A dictionary of movies sorted by rating in descending order.
+        """
         movies = self._storage.list_movies()
         return dict(sorted(movies.items(), key=lambda item: item[1]["rating"], reverse=True))
 
     def create_histogram(self, filename="movies_histogram.png"):
+        """
+        Creates and saves a histogram of movie ratings as a PNG file in the 'histograms' directory.
+        :arg:
+            filename (str): The name of the file to save the histogram as. Default is "movies_histogram.png".
+        """
         movies = self._storage.list_movies()
         movie_ratings = [val["rating"] for val in movies.values()]
 
@@ -35,14 +79,31 @@ class MovieManager:
         plt.show()
 
     def sort_chronologically_latest_first(self):
+        """
+        Sorts the movies by their release year in descending order and returns the sorted dictionary.
+        :return: (dict): A dictionary of movies sorted by release year from latest to earliest.
+        """
         movies = self._storage.list_movies()
         return dict(sorted(movies.items(), key=lambda item: item[1]["year"], reverse=True))
 
     def sort_chronologically_earliest_first(self):
+        """
+        Sorts the movies by their release year in ascending order and returns the sorted dictionary.
+        :return: (dict): A dictionary of movies sorted by release year from earliest to latest.
+        """
         movies = self._storage.list_movies()
         return dict(sorted(movies.items(), key=lambda item: item[1]["year"], reverse=False))
 
     def filter_movies(self, min_rating_input, start_year_input, end_year_input):
+        """
+        Filters movies based on the provided rating and release year range.
+        :arg:
+            min_rating_input (str): The minimum rating to filter movies by (between 0 and 10).
+            start_year_input (str): The start year for filtering movies.
+            end_year_input (str): The end year for filtering movies.
+        :return: (tuple): A tuple containing a list of filtered movies (or an empty list if no movies match) and
+                   an error message (or None if no error).
+        """
         current_year = datetime.now().year
         try:
             min_rating = float(min_rating_input) if min_rating_input else None
@@ -76,4 +137,3 @@ class MovieManager:
             and (end_year is None or int(details['year']) <= end_year)
         ]
         return filtered_movies, None
-

@@ -4,10 +4,35 @@ from utilities import get_country_code_from_name
 
 
 class WebsiteGenerator:
+    """
+    A class for generating a simple HTML website displaying a movie library with details such as title,
+    year, rating, poster, and country flag.
+
+    Methods:
+        __init__(storage):
+            Initializes the WebsiteGenerator with a storage object that holds movie data.
+
+        generate_website():
+            Generates an HTML file with a list of movies, their details, and country flags,
+            then saves it to the 'web' folder as index.html.
+    """
+
     def __init__(self, storage):
+        """
+        Initializes the WebsiteGenerator instance with a storage object for managing movie data.
+        :arg:
+            storage: An instance of the storage class responsible for providing movie data.
+        """
         self._storage = storage
 
     def generate_website(self):
+        """
+        Generates an HTML website displaying a list of movies. For each movie, it includes details such as
+        the title, year, rating, poster, country flag, and a link to the IMDb page. The generated website
+        is saved as 'index.html' in the 'web' directory.
+        The method also adds country flags by fetching the corresponding country code and uses the `get_country_code_from_name` function
+        to generate the flag image URL.
+        """
         movies = self._storage.list_movies()
         html_content = """
          <!DOCTYPE html>
@@ -53,6 +78,7 @@ class WebsiteGenerator:
          </html>
          """
 
+        # write the HTML content to a file
         with open(join("web", "index.html"), "w") as file:
             file.write(html_content)
 

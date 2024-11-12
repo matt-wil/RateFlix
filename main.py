@@ -17,29 +17,33 @@ class MovieApplicationRun:
             self.storage = StorageCSV()
         else:
             self.storage = StorageJson()
-        view = MovieAppTerminalUI
         crud = MovieCrud(self.storage)
         manager = MovieManager(self.storage)
         stats = MovieStats(self.storage)
-        search = MovieSearch(self.storage, view)
+        search = MovieSearch(self.storage)
         website_gen = WebsiteGenerator(self.storage)
+        view = MovieAppTerminalUI(crud, manager, stats, search, website_gen)
         self.app = MovieAppTerminalUI(crud, manager, stats, search, website_gen)
         # Initialize a dispatcher dictionary
         self.menu_options = {
-            0: self.app.exit,
-            1: self.app.display_all,
-            2: self.app.add,
-            3: self.app.delete,
-            4: self.app.update,
-            5: self.app.display_stats,
-            6: self.app.display_random,
-            7: self.app.search,
-            8: self.app.display_sorted,
-            9: self.app.create_histogram,
-            10: self.app.display_chronologically,
-            11: self.app.filter,
-            12: self.app.generate_website,
+            0: lambda: self._execute_and_returner(self.app.exit),
+            1: lambda: self._execute_and_returner(self.app.display_all),
+            2: lambda: self._execute_and_returner(self.app.add),
+            3: lambda: self._execute_and_returner(self.app.delete),
+            4: lambda: self._execute_and_returner(self.app.update),
+            5: lambda: self._execute_and_returner(self.app.display_stats),
+            6: lambda: self._execute_and_returner(self.app.display_random),
+            7: lambda: self._execute_and_returner(self.app.search),
+            8: lambda: self._execute_and_returner(self.app.display_sorted),
+            9: lambda: self._execute_and_returner(self.app.create_histogram),
+            10: lambda: self._execute_and_returner(self.app.display_chronologically),
+            11: lambda: self._execute_and_returner(self.app.filter),
+            12: lambda: self._execute_and_returner(self.app.generate_website),
         }
+
+    def _execute_and_returner(self, func):
+        func()
+        utilities.returner_func()
 
     def run(self):
         # utilities.welcome_page()

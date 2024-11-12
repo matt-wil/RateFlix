@@ -25,9 +25,20 @@ class StorageJson(IStorage):
 
     """
     def __init__(self, file_path=join("model", "movies.json")):
+        """Initialise the JSON file with the correct filepath"""
         self.file_path = file_path
 
     def list_movies(self):
+        """read the JSON file and return the file contents in dictionary format
+        :return: (dict)  {"title": {
+                                    "rating": rating,
+                                    "year": year,
+                                    "poster": poster,
+                                    "imdbID": imdbID,
+                                    "country": country,
+                                    "note": note
+                                    }
+                            }"""
         try:
             with open(self.file_path, "r") as json_file:
                 return json.load(json_file)
@@ -35,8 +46,8 @@ class StorageJson(IStorage):
             return {}
 
     def update_movie(self, title: str, note: str):
+        """Read the JSON file update a note into the selected movie and resave the file"""
         movies = self.list_movies()
-        # update the movie rating
         if title in movies:
             movies[title]["note"] = note
             self._save_movies(movies)
@@ -61,5 +72,6 @@ class StorageJson(IStorage):
             self._save_movies(movies)
 
     def _save_movies(self, movies: dict):
+        """Saves the JSON file in correct format"""
         with open(self.file_path, "w") as json_file:
             json.dump(movies, json_file, indent=4)

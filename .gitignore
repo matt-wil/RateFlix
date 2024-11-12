@@ -7,8 +7,7 @@ storage
 
 # Until ready to Fletify the app
 fletify
-flet_main.py
-view/movieFlet.py
+
 
 # Template
 
