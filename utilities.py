@@ -3,7 +3,6 @@ import time
 from colorama import Fore, Style, Back
 import logging
 import pycountry
-from model.movie_api import api_extraction
 
 
 def welcome_page():
@@ -104,30 +103,6 @@ def returner_func():
     input(Fore.CYAN + Style.BRIGHT + "Please press enter to return to the main menu!")
 
 
-def add(movies, storage):
-    try:
-        movie_to_add = input(
-            Fore.LIGHTGREEN_EX + "What Movie would you like to add to the PopcornPicker library?\n>>> ")
-        if not movie_to_add:
-            raise ValueError("You didn't type a movie name")
-
-        movie_details = api_extraction(movie_to_add)
-        if movie_to_add in movies:
-            print(Fore.CYAN + "Movie is already in the Library.\n"
-                              "Taking you back to the main menu")
-            returner_func()
-            return
-        movie_to_add, movie_rating, movie_year, movie_poster, imdb_full_link, country = api_extraction(
-            movie_to_add)
-        storage.add_movie(movie_to_add, movie_rating, movie_year, movie_poster, imdb_full_link, country)
-        print(f"{movie_to_add} successfully added to the PopcornPicker Library. "
-              f"Released in {movie_year} it has a imdb rating of {movie_rating}")
-    except Exception as e:
-        print(f"Error occurred: {e}")
-
-    returner_func()
-
-
 def get_country_code_from_name(country):
     """
     Receives a string containing 1 or more country names.
@@ -173,4 +148,5 @@ def validate_input(prompt, cast_type):
 
 
 def exit_program():
+    """Safely exit the program"""
     sys.exit()

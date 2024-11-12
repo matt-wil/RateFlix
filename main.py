@@ -12,7 +12,21 @@ import utilities
 
 
 class MovieApplicationRun:
+    """
+    Main class to manage the movie application. This class initializes storage, view,
+    and other components, and provides a menu-based interface for interacting with the
+    movie database.
+    Attributes:
+        storage (object): The storage system (JSON or CSV) for managing movie data.
+        app (MovieAppTerminalUI): The terminal-based user interface.
+        menu_options (dict): A dictionary that maps menu choices to functions.
+    """
     def __init__(self, storage_type="json"):
+        """
+        Initializes the MovieApplicationRun with the chosen storage type (JSON or CSV).
+        :arg:
+            storage_type (str): The type of storage to use ("json" or "csv").
+        """
         if storage_type == "csv":
             self.storage = StorageCSV()
         else:
@@ -22,7 +36,6 @@ class MovieApplicationRun:
         stats = MovieStats(self.storage)
         search = MovieSearch(self.storage)
         website_gen = WebsiteGenerator(self.storage)
-        view = MovieAppTerminalUI(crud, manager, stats, search, website_gen)
         self.app = MovieAppTerminalUI(crud, manager, stats, search, website_gen)
         # Initialize a dispatcher dictionary
         self.menu_options = {
@@ -42,10 +55,12 @@ class MovieApplicationRun:
         }
 
     def _execute_and_returner(self, func):
+        """Executes a function than calls the returner function after"""
         func()
         utilities.returner_func()
 
     def run(self):
+        """Runs the main loop of the app. displaying the menu and responding to user input until exited"""
         # utilities.welcome_page()
         while True:
             user_input = utilities.main_menu()
@@ -55,6 +70,10 @@ class MovieApplicationRun:
 
 
 def main():
+    """
+    Entry point of the application. Parses command-line arguments to determine
+    the storage file and type (JSON or CSV) and starts the application.
+    """
     # set up argument parsing
     parser = argparse.ArgumentParser(description="Run the movie application with a specified storage file.")
     parser.add_argument("storage_file", type=str, help="Path to the storage file (JSON or CSV).")
