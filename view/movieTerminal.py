@@ -141,8 +141,10 @@ class MovieAppTerminalUI(BaseUI):
         if error_message:
             print(error_message)
         else:
-            for movie, year, rating in filtered_movies:
+            for movie, year, rating, poster, note in filtered_movies:
                 print(f"{movie} was released in {year} and has an imdb rating of {rating}")
+                if note:
+                    print(f"Note: {note}")
 
     def generate_website(self):
         self.presenter_web_gen.generate_website()

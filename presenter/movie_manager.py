@@ -64,11 +64,16 @@ class MovieManager:
             return [], "Invalid input for the end year. Please enter a number or leave it blank"
         movies = self._storage.list_movies()
         filtered_movies = [
-            (movie, int(details['year']), float(details['rating']))
+            (
+                movie,
+                int(details['year']),
+                float(details['rating']),
+                details['poster'],
+                details.get('note')
+            )
             for movie, details in movies.items() if (min_rating is None or float(details['rating']) >= min_rating)
             and (start_year is None or int(details['year']) >= start_year)
             and (end_year is None or int(details['year']) <= end_year)
         ]
-
         return filtered_movies, None
 

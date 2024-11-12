@@ -11,24 +11,37 @@ from model.storage_csv import StorageCSV
 from model.storage_json import StorageJson
 
 
-class SearchView:
-    def get_search_input(self, search_text: str):
-        search_input = st.text_input(search_text)
-        return search_input
-
-    def show_results(self, results):
-        if results:
-            for movie in results:
-                st.write(f"**Title**: {movie['title']}, **Year**: {movie['year']}, **Rating**: {movie['rating']}")
-            else:
-                st.write("No movies found.")
-
-
 # Page config
 st.set_page_config(
     page_title="PopcornPicker",
     page_icon="🎥",
 )
+
+
+class SearchView:
+    def get_search_input(self):
+        return st.session_state.get("search_item", "")
+
+    def show_results(self, results):
+        if results:
+            st.header("Here are your search results")
+            for result in results:
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.header(result['title'])
+                    poster_url = result.get('poster', None)
+                    if poster_url:
+                        st.image(poster_url)
+                    else:
+                        st.write("Poster not available")
+                with col2:
+                    st.subheader(f"Released in {result['year']}")
+                    st.subheader(f"Made in {result['country']}")
+                    st.subheader(f"Imbd rating of {result['rating']}")
+            else:
+                st.write("No matching movies found")
+
+
 st.title("Welcome to the PopcornPicker Movie Application.")
 st.text("Please choose your storage type.")
 
@@ -40,7 +53,8 @@ with col1:
 with col2:
     CSV = st.button("CSV")
 
-view = SearchView()
+if "view" not in st.session_state:
+    st.session_state.view = SearchView()
 # initialize storage and functionality as session_state variables
 if JSON:
     st.session_state.selected_storage = "json"
@@ -48,7 +62,7 @@ if JSON:
     st.session_state.crud = MovieCrud(st.session_state.storage)
     st.session_state.web_gen = WebsiteGenerator(st.session_state.storage)
     st.session_state.stats = MovieStats(st.session_state.storage)
-    st.session_state.search = MovieSearch(st.session_state.storage, view)
+    st.session_state.search = MovieSearch(st.session_state.storage, st.session_state.view)
     st.session_state.manager = MovieManager(st.session_state.storage)
     st.success("JSON storage selected")
 
@@ -59,7 +73,7 @@ if CSV:
     st.session_state.crud = MovieCrud(st.session_state.storage)
     st.session_state.web_gen = WebsiteGenerator(st.session_state.storage)
     st.session_state.stats = MovieStats(st.session_state.storage)
-    st.session_state.search = MovieSearch(st.session_state.storage, view)
+    st.session_state.search = MovieSearch(st.session_state.storage, st.session_state.view)
     st.session_state.manager = MovieManager(st.session_state.storage)
     st.success("CSV storage selected")
 

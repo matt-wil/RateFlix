@@ -30,7 +30,15 @@ class MovieSearch:
         if search_item in lower_movies:
             exact_search = lower_movies[search_item]
             return [
-                {'title': exact_search, 'year': movies[exact_search]['year'], 'rating': movies[exact_search]['rating']}]
+                {
+                    'title': exact_search,
+                    'year': movies[exact_search]['year'],
+                    'rating': movies[exact_search]['rating'],
+                    'poster': movies[exact_search]['poster'],
+                    'country': movies[exact_search]['country'],
+                    'note': movies[exact_search]['note']
+                }
+            ]
         return None
 
     @staticmethod
@@ -40,7 +48,16 @@ class MovieSearch:
         fuzzy_results = [(title, score) for title, score in fuzzy_matches if score > 50]
 
         if fuzzy_results:
-            return [{'title': title, 'year': movies[title]['year'], 'rating': movies[title]['rating']} for title, score
+            return [
+                {
+                'title': title,
+                    'year': movies[title]['year'],
+                    'rating': movies[title]['rating'],
+                    'poster': movies[title]['poster'],
+                    'country': movies[title]['country'],
+                    'note': movies[title]['note']
+                }
+                for title, score
                     in fuzzy_results]
         return None
 
@@ -52,5 +69,12 @@ class MovieSearch:
         sorted_distances = sorted(distances, key=lambda x: x[1])
         top_matches = [match for match in sorted_distances if match[1] < 5][:5]
         return [
-            {'title': title, 'year': movies[title]['year'], 'rating': movies[title]['rating']}
+            {
+                'title': title,
+                'year': movies[title]['year'],
+                'rating': movies[title]['rating'],
+                'poster': movies[title]['poster'],
+                'country': movies[title]['country'],
+                'note': movies[title]['note']
+            }
             for title, distance in top_matches] if top_matches else None

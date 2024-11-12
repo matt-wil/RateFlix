@@ -21,11 +21,12 @@ for title, details in movies_dict.items():
     with col1:
         st.image(f"{details.get('poster')}")
     with col2:
-        st.subheader(f"{title}")
-        st.write(f"Released in {details.get('year')}")
-        st.write(f"Imdb Rating:{details.get('rating')}")
-        st.write(f"Movie Note: {details.get('note') if details.get('note') else None}")
-        st.write(f"Filmed in: {details.get('country')}")
+        st.header(f"{title}")
+        st.subheader(f"Released in {details.get('year')}")
+        st.subheader(f"Imdb Rating: {details.get('rating')}")
+        st.subheader(f"Filmed in: {details.get('country')}")
+        if details.get('note'):
+            st.subheader(f"Movie Note: {details.get('note')}")
 
 
 st.sidebar.success("Select a Page above")

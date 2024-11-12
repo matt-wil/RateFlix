@@ -24,14 +24,14 @@ with col1:
     st.subheader(f"Average Rating: {st.session_state.stats.calc_avg()}")
     st.subheader(f"Highest Rated Movies:")
     for title in highest_rated_movies:
-        st.subheader(f"{title}: {highest_rating}")
+        st.subheader(f"{title} with a rating of {highest_rating}")
         st.image(f"{movies.get(title)['poster']}")
     st.write("")
 with col2:
     st.subheader(f"Mean Rating: {st.session_state.stats.calc_mean()}")
     st.subheader(f"Lowest Rated Movies:")
     for title in lowest_rated_movies:
-        st.subheader(f"{title}: {lowest_rating}")
+        st.subheader(f"{title} with a rating of {lowest_rating}")
         st.image(f"{movies.get(title)['poster']}")
     st.write("")
 
