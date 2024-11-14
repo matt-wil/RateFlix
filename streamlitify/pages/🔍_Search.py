@@ -1,9 +1,6 @@
 import streamlit as st
-import importlib
-
 from presenter.movie_manager import MovieManager
 
-homepage_module = importlib.import_module("streamlitify.🎥_Homepage")
 
 if "manager" not in st.session_state:
     st.session_state.manager = MovieManager(st.session_state.storage)

@@ -38,8 +38,8 @@ class MovieManager:
         create_histogram(filename="movies_histogram.png"):
             Creates and saves a histogram of movie ratings as a PNG file in the 'histograms' directory.
 
-        sort_chronologically_latest_first():
-            Sorts the movies by their release year in descending order and returns the sorted dictionary.
+        sort_chronologically(latest_first=True):
+            Sorts the movies by their release year in descending or ascending order and returns the sorted dictionary.
 
         sort_chronologically_earliest_first():
             Sorts the movies by their release year in ascending order and returns the sorted dictionary.
@@ -197,21 +197,14 @@ class MovieManager:
 
         plt.show()
 
-    def sort_chronologically_latest_first(self):
+    def sort_chronologically(self, latest_first=True):
         """
-        Sorts the movies by their release year in descending order and returns the sorted dictionary.
+        Sorts the movies by their release year in descending or descending order and returns the sorted dictionary.
+        :param: latest_first: (bool) True to sort the movies from latest first or False for earliest first
         :return: (dict): A dictionary of movies sorted by release year from latest to earliest.
         """
         movies = self._storage.list_movies()
-        return dict(sorted(movies.items(), key=lambda item: item[1]["year"], reverse=True))
-
-    def sort_chronologically_earliest_first(self):
-        """
-        Sorts the movies by their release year in ascending order and returns the sorted dictionary.
-        :return: (dict): A dictionary of movies sorted by release year from earliest to latest.
-        """
-        movies = self._storage.list_movies()
-        return dict(sorted(movies.items(), key=lambda item: item[1]["year"], reverse=False))
+        return dict(sorted(movies.items(), key=lambda item: item[1]["year"], reverse=latest_first))
 
     def filter_movies(self, min_rating_input, start_year_input, end_year_input):
         """

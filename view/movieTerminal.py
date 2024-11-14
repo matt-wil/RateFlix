@@ -187,17 +187,17 @@ class MovieAppTerminalUI(BaseUI):
     @utilities.menu_option
     def display_chronologically(self):
         """Displays movies sorted chronologically. Prompts the user for the choice of earliest or latest first"""
-        latest_first = self.presenter_manager.sort_chronologically_latest_first()
-        earliest_first = self.presenter_manager.sort_chronologically_earliest_first()
         user_input = input(
             Fore.LIGHTGREEN_EX + "Would you like not to see the movies from latest movies first? Y/N\n>>> ").upper()
         if user_input == "Y":
+            latest_first = self.presenter_manager.sort_chronologically_latest_first()
             # sort latest to earliest
             print(Fore.CYAN + "Movies sorted by rating:")
             for movie, details in latest_first.items():
                 print(
                     f"{Fore.YELLOW}{movie}{Fore.RESET}: Rating: {Fore.YELLOW}{details['rating']}{Fore.RESET}, Year: {Fore.YELLOW}{details['year']}")
         elif user_input == "N":
+            earliest_first = self.presenter_manager.sort_chronologically_earliest_first(latest_first=False)
             # sort earliest to latest
             print(Fore.CYAN + "Movies sorted by rating:")
             for movie, details in earliest_first.items():
@@ -234,8 +234,3 @@ class MovieAppTerminalUI(BaseUI):
         """Gives a thankyou message and exits the program"""
         print("Thanks for using the PopcornPicker Movie Application!")
         utilities.exit_program()
-
-    def get_search_input(self):
-        """Gets the movie search input from the user."""
-        return input(
-            Fore.LIGHTGREEN_EX + "Please type the title of the movie you're searching for:\n>>> ").strip().lower()
