@@ -1,5 +1,5 @@
 import streamlit as st
-from old_app.movie_crud import MovieCrud
+from presenter.movie_manager import MovieManager
 
 st.set_page_config(
     page_title="PopcornPicker",
@@ -10,10 +10,10 @@ if "storage" not in st.session_state:
     st.session_state.storage = None
     st.warning("Please select a storage on the Homepage!")
 
-if "crud" not in st.session_state:
-    st.session_state.crud = MovieCrud(st.session_state.storage)
+if "manager" not in st.session_state:
+    st.session_state.manager = MovieManager(st.session_state.storage)
 
-movies_dict = st.session_state.crud.list_movies()
+movies_dict = st.session_state.manager.list_movies()
 st.title("Here is a List of all the Movies currently in the PopcornPicker library 👀")
 
 for title, details in movies_dict.items():
