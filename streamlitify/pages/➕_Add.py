@@ -1,13 +1,15 @@
 import streamlit as st
 from model.storage_csv import StorageCSV
-from presenter.movie_crud import MovieCrud
 import os
+
+from presenter.movie_manager import MovieManager
+
 os.getcwd()
 
 
 # initialize database
 storage = StorageCSV()
-crud = MovieCrud(storage)
+manager = MovieManager(storage)
 
 st.set_page_config(
     page_title="PopcornPicker",
@@ -25,7 +27,7 @@ my_input = st.text_input("Enter movie name here", st.session_state["movie_to_add
 add = st.button("Add ➕")
 if add:
     st.session_state["movie_to_add"] = my_input
-    result = crud.add_movie(my_input)
+    result = manager.add_movie(my_input)
     if result.get("success"):
         st.write(result.get("message"))
     else:

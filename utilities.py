@@ -95,12 +95,16 @@ def main_menu():
             print(f"{Fore.RED + Back.BLACK}Something went wrong! \n Error message: {e}")
 
 
-def returner_func():
-    """
-    This function will play after every finished menu option in order for the user to press enter and return to menu.
-    :return: User input 'ENTER' key.
-    """
-    input(Fore.CYAN + Style.BRIGHT + "Please press enter to return to the main menu!")
+def menu_option(func):
+    def wrapper(*args, **kwargs):
+        """
+        This function will play after every finished menu option in order for the user to press enter and return to menu.
+        :return: User input 'ENTER' key.
+        """
+        result = func(*args, **kwargs)
+        input(Fore.CYAN + Style.BRIGHT + "Please press enter to return to the main menu!")
+        return result
+    return wrapper
 
 
 def get_country_code_from_name(country):

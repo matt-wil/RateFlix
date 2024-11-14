@@ -154,5 +154,20 @@
         "poster": "https://m.media-amazon.com/images/M/MV5BMTkwNzY4Mzg5N15BMl5BanBnXkFtZTcwNzE4MzEyMQ@@._V1_SX300.jpg",
         "imdbID": "https://www.imdb.com/title/tt0136199/",
         "country": "United States"
+    },
+    "Dracula dead and loving it": {
+        "rating": "5.8",
+        "year": "1995",
+        "poster": "https://m.media-amazon.com/images/M/MV5BN2I2MjQzYTgtZWU5ZS00ZGZmLWFhNmQtNjVlODE0OTM4Y2JhXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0112896/",
+        "country": "France, United States",
+        "note": "This is HILARIOUS"
+    },
+    "Dracula": {
+        "rating": "7.4",
+        "year": "1931",
+        "poster": "https://m.media-amazon.com/images/M/MV5BZTg2YzcxODUtYTQ2Ny00ODY0LWI2MGItNWNkMjM3YjQ1Y2EwXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdbID": "https://www.imdb.com/title/tt0021814/",
+        "country": "United States"
     }
 }

@@ -1,5 +1,5 @@
 import streamlit as st
-from presenter.movie_crud import MovieCrud
+from old_app.movie_crud import MovieCrud
 
 st.set_page_config(
     page_title="PopcornPicker",

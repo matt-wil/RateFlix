@@ -1,5 +1,5 @@
 import streamlit as st
-from presenter.movie_search import MovieSearch
+from old_app.movie_search import MovieSearch
 import importlib
 homepage_module = importlib.import_module("streamlitify.🎥_Homepage")
 SearchView = getattr(homepage_module, "SearchView")

@@ -1,5 +1,5 @@
 import streamlit as st
-from presenter.movie_stats import MovieStats
+from old_app.movie_stats import MovieStats
 
 st.set_page_config(
     page_title="PopcornPicker",

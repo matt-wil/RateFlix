@@ -2,11 +2,11 @@ import argparse
 from model.storage_json import StorageJson
 from model.storage_csv import StorageCSV
 import command_line_args
-from presenter.movie_crud import MovieCrud
+from old_app.movie_crud import MovieCrud
 from presenter.movie_manager import MovieManager
-from presenter.movie_search import MovieSearch
-from presenter.movie_stats import MovieStats
-from presenter.movie_website_generator import WebsiteGenerator
+from old_app.movie_search import MovieSearch
+from old_app.movie_stats import MovieStats
+from old_app.movie_website_generator import WebsiteGenerator
 from view.movieTerminal import MovieAppTerminalUI
 import utilities
 
@@ -31,33 +31,24 @@ class MovieApplicationRun:
             self.storage = StorageCSV()
         else:
             self.storage = StorageJson()
-        crud = MovieCrud(self.storage)
         manager = MovieManager(self.storage)
-        stats = MovieStats(self.storage)
-        search = MovieSearch(self.storage)
-        website_gen = WebsiteGenerator(self.storage)
-        self.app = MovieAppTerminalUI(crud, manager, stats, search, website_gen)
+        self.app = MovieAppTerminalUI(manager)
         # Initialize a dispatcher dictionary
         self.menu_options = {
-            0: lambda: self._execute_and_returner(self.app.exit),
-            1: lambda: self._execute_and_returner(self.app.display_all),
-            2: lambda: self._execute_and_returner(self.app.add),
-            3: lambda: self._execute_and_returner(self.app.delete),
-            4: lambda: self._execute_and_returner(self.app.update),
-            5: lambda: self._execute_and_returner(self.app.display_stats),
-            6: lambda: self._execute_and_returner(self.app.display_random),
-            7: lambda: self._execute_and_returner(self.app.search),
-            8: lambda: self._execute_and_returner(self.app.display_sorted),
-            9: lambda: self._execute_and_returner(self.app.create_histogram),
-            10: lambda: self._execute_and_returner(self.app.display_chronologically),
-            11: lambda: self._execute_and_returner(self.app.filter),
-            12: lambda: self._execute_and_returner(self.app.generate_website),
+            0: self.app.exit,
+            1: self.app.display_all,
+            2: self.app.add,
+            3: self.app.delete,
+            4: self.app.update,
+            5: self.app.display_stats,
+            6: self.app.display_random,
+            7: self.app.search,
+            8: self.app.display_sorted,
+            9: self.app.create_histogram,
+            10: self.app.display_chronologically,
+            11: self.app.filter,
+            12: self.app.generate_website,
         }
-
-    def _execute_and_returner(self, func):
-        """Executes a function than calls the returner function after"""
-        func()
-        utilities.returner_func()
 
     def run(self):
         """Runs the main loop of the app. displaying the menu and responding to user input until exited"""
@@ -65,7 +56,7 @@ class MovieApplicationRun:
         while True:
             user_input = utilities.main_menu()
             # Call the corresponding function or return if not valid
-            func = self.menu_options.get(user_input, utilities.returner_func)
+            func = self.menu_options.get(user_input, utilities.menu_option)
             func()
 
 

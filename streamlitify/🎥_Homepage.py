@@ -2,11 +2,7 @@ import streamlit as st
 import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from presenter.movie_crud import MovieCrud
-from presenter.movie_website_generator import WebsiteGenerator
 from presenter.movie_manager import MovieManager
-from presenter.movie_search import MovieSearch
-from presenter.movie_stats import MovieStats
 from model.storage_csv import StorageCSV
 from model.storage_json import StorageJson
 
@@ -59,10 +55,6 @@ if "view" not in st.session_state:
 if JSON:
     st.session_state.selected_storage = "json"
     st.session_state.storage = StorageJson()
-    st.session_state.crud = MovieCrud(st.session_state.storage)
-    st.session_state.web_gen = WebsiteGenerator(st.session_state.storage)
-    st.session_state.stats = MovieStats(st.session_state.storage)
-    st.session_state.search = MovieSearch(st.session_state.storage, st.session_state.view)
     st.session_state.manager = MovieManager(st.session_state.storage)
     st.success("JSON storage selected")
 
@@ -70,10 +62,6 @@ if JSON:
 if CSV:
     st.session_state.selected_storage = "csv"
     st.session_state.storage = StorageCSV()
-    st.session_state.crud = MovieCrud(st.session_state.storage)
-    st.session_state.web_gen = WebsiteGenerator(st.session_state.storage)
-    st.session_state.stats = MovieStats(st.session_state.storage)
-    st.session_state.search = MovieSearch(st.session_state.storage, st.session_state.view)
     st.session_state.manager = MovieManager(st.session_state.storage)
     st.success("CSV storage selected")
 

@@ -1,7 +1,7 @@
 import os
 
 import streamlit as st
-from presenter.movie_website_generator import WebsiteGenerator
+from old_app.movie_website_generator import WebsiteGenerator
 
 
 web_directory = os.path.join(os.getcwd(), "web", "index.html")
