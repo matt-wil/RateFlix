@@ -21,6 +21,7 @@ class MovieApplicationRun:
         app (MovieAppTerminalUI): The terminal-based user interface.
         menu_options (dict): A dictionary that maps menu choices to functions.
     """
+
     def __init__(self, storage_type="json"):
         """
         Initializes the MovieApplicationRun with the chosen storage type (JSON or CSV).
@@ -55,6 +56,7 @@ class MovieApplicationRun:
         # utilities.welcome_page()
         while True:
             user_input = utilities.main_menu()
+            utilities.logging_users_choice(user_input)
             # Call the corresponding function or return if not valid
             func = self.menu_options.get(user_input, utilities.menu_option)
             func()
@@ -66,15 +68,18 @@ def main():
     the storage file and type (JSON or CSV) and starts the application.
     """
     # set up argument parsing
-    parser = argparse.ArgumentParser(description="Run the movie application with a specified storage file.")
-    parser.add_argument("storage_file", type=str, help="Path to the storage file (JSON or CSV).")
+    parser = argparse.ArgumentParser(
+        description="Run the movie application with a specified storage file.")
+    parser.add_argument("storage_file", type=str,
+                        help="Path to the storage file (JSON or CSV).")
 
     # Parse arguments
     args = parser.parse_args()
 
     # determine storage type via file extension
     try:
-        storage_type = command_line_args.determine_storage_type(args.storage_file)
+        storage_type = command_line_args.determine_storage_type(
+            args.storage_file)
     except ValueError as e:
         print(f"Error: {e}")
         return

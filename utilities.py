@@ -1,8 +1,9 @@
 import sys
 import time
-from colorama import Fore, Style, Back
 import logging
 import pycountry
+from colorama import Fore, Style, Back
+from datetime import datetime
 
 
 def welcome_page():
@@ -75,7 +76,8 @@ def main_menu():
         print(Fore.LIGHTWHITE_EX + "12. Generate Website")
         print()
 
-        user_menu_input = input(Fore.LIGHTGREEN_EX + "Enter choice (0-12): \n >>> ")
+        user_menu_input = input(Fore.LIGHTGREEN_EX +
+                                "Enter choice (0-12): \n >>> ")
 
         if user_menu_input.strip() == "":
             print(Fore.MAGENTA + "You forget to enter a menu number!")
@@ -92,7 +94,8 @@ def main_menu():
             print(Fore.MAGENTA + "Enter only numbers please!")
         except Exception as e:
             logging.error(e)
-            print(f"{Fore.RED + Back.BLACK}Something went wrong! \n Error message: {e}")
+            print(
+                f"{Fore.RED + Back.BLACK}Something went wrong! \n Error message: {e}")
 
 
 def menu_option(func):
@@ -102,7 +105,8 @@ def menu_option(func):
         :return: User input 'ENTER' key.
         """
         result = func(*args, **kwargs)
-        input(Fore.CYAN + Style.BRIGHT + "Please press enter to return to the main menu!")
+        input(Fore.CYAN + Style.BRIGHT +
+              "Please press enter to return to the main menu!")
         return result
     return wrapper
 
@@ -154,3 +158,25 @@ def validate_input(prompt, cast_type):
 def exit_program():
     """Safely exit the program"""
     sys.exit()
+
+
+filename = "users_choice_log.txt"
+
+
+def logging_users_choice(user_choice, file=filename):
+    """
+    user choice
+    logged
+    ordered
+    into file
+    def logging_user_choice(users_choice, filename)
+    open
+    if nots there create
+    write choice into file, timestamp or ID
+    save file
+    """
+    with open(file, 'a') as file_obj:
+        dt = datetime.now()
+        timestamp = dt.timestamp()
+        choice_line = f"\nUsers choice: {user_choice}\n Timestamp: {timestamp}"
+        file_obj.write(choice_line)

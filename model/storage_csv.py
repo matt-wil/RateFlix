@@ -25,6 +25,7 @@ class StorageCSV(IStorage):
                 writes/saves the movies dictionary back to the movies.csv file.
 
         """
+
     def __init__(self, file_path=join("model", "movies.csv")):
         """Initialise the object with the CSV filepath"""
         self.file_path = file_path
@@ -48,12 +49,18 @@ class StorageCSV(IStorage):
                 reader = csv.DictReader(csv_file)
                 for row in reader:
                     movies[row["title"]] = {
-                        "rating": row.get("rating", "N/A"),  # Default value for missing rating
-                        "year": row.get("year", "N/A"),  # Default value for missing year
-                        "poster": row.get("poster", "No Poster Available"),  # Default value for missing poster
-                        "imdbID": row.get("imdbID", "Unknown"),  # Default value for missing imdbID
-                        "country": row.get("country", "Unknown"),  # Default value for missing country
-                        "note": row.get("note", "No notes available"),  # Default value for missing note
+                        # Default value for missing rating
+                        "rating": row.get("rating", "N/A"),
+                        # Default value for missing year
+                        "year": row.get("year", "N/A"),
+                        # Default value for missing poster
+                        "poster": row.get("poster", "No Poster Available"),
+                        # Default value for missing imdbID
+                        "imdbID": row.get("imdbID", "Unknown"),
+                        # Default value for missing country
+                        "country": row.get("country", "Unknown"),
+                        # Default value for missing note
+                        "note": row.get("note", "No notes available"),
                     }
         except FileNotFoundError:
             pass
@@ -73,7 +80,8 @@ class StorageCSV(IStorage):
         file_exists = os.path.isfile(self.file_path)
 
         with open(self.file_path, mode="a", newline="") as csv_file:
-            fieldnames = ["title", "rating", "year", "poster", "imdbID", "country", "note"]
+            fieldnames = ["title", "rating", "year",
+                          "poster", "imdbID", "country", "note"]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
 
             if not file_exists:
@@ -99,7 +107,8 @@ class StorageCSV(IStorage):
     def _save_movies(self, movies: dict):
         """Saving method to save the CSV file back into the correct storage format"""
         with open(self.file_path, mode="w", newline="") as csv_file:
-            fieldnames = ["title", "rating", "year", "poster", "imdbID", "country", "note"]
+            fieldnames = ["title", "rating", "year",
+                          "poster", "imdbID", "country", "note"]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader()
             for title, info in movies.items():
@@ -112,5 +121,3 @@ class StorageCSV(IStorage):
                     "country": info["country"],
                     "note": info["note"],
                 })
-
-

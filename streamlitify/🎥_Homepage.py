@@ -1,10 +1,10 @@
+from model.storage_json import StorageJson
+from model.storage_csv import StorageCSV
+from presenter.movie_manager import MovieManager
 import streamlit as st
 import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from presenter.movie_manager import MovieManager
-from model.storage_csv import StorageCSV
-from model.storage_json import StorageJson
 
 
 # Page config
@@ -49,4 +49,3 @@ st.text("This Application was built using only 🐍 ")
 st.text("Created by Matthew Williams")
 st.link_button("My Github", "https://github.com/matt-wil")
 st.sidebar.success("Select a Page above")
-

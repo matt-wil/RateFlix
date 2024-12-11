@@ -55,6 +55,7 @@ class MovieAppTerminalUI(BaseUI):
         exit():
             Exits the application.
     """
+
     def __init__(self, presenter_manager):
         """
         Initialising the UI with the presenter class for different functionality
@@ -78,7 +79,8 @@ class MovieAppTerminalUI(BaseUI):
         :return:
         """
         movies = self.presenter_manager.list_movies()
-        print(f"\nThere are {len(movies.keys())} movies currently in the PopcornPicker library.")
+        print(
+            f"\nThere are {len(movies.keys())} movies currently in the PopcornPicker library.")
         for movie, details in movies.items():
             print(Fore.CYAN + movie)
             print(f"\thas a rating of {Fore.YELLOW}{details['rating']}")
@@ -101,7 +103,8 @@ class MovieAppTerminalUI(BaseUI):
     @utilities.menu_option
     def delete(self):
         """Prompts the user to delete a movie by entering movie name"""
-        movie_to_delete = input(Fore.LIGHTGREEN_EX + "Enter the movie you would like to delete: \n >>> ")
+        movie_to_delete = input(
+            Fore.LIGHTGREEN_EX + "Enter the movie you would like to delete: \n >>> ")
         result = self.presenter_manager.delete_movie(movie_to_delete)
         if result.get("success"):
             print(result.get("message"))
@@ -114,7 +117,8 @@ class MovieAppTerminalUI(BaseUI):
         movie_name = input(
             Fore.LIGHTGREEN_EX + "Which movie would you like to add a note to?\n>>> "
         )
-        notes = input(Fore.LIGHTGREEN_EX + "What note would you like to add?\n>>> ")
+        notes = input(Fore.LIGHTGREEN_EX +
+                      "What note would you like to add?\n>>> ")
         result = self.presenter_manager.update_movie(movie_name, notes)
         if result.get("success"):
             print(result.get("message"))
@@ -128,7 +132,8 @@ class MovieAppTerminalUI(BaseUI):
         lowest_rating = self.presenter_manager.lowest_rating()
         highest_rated_movies = self.presenter_manager.highest_rated_movies()
         lowest_rated_movies = self.presenter_manager.lowest_rated_movies()
-        print(f"The Average rating is: {self.presenter_manager.calc_avg():.2f}")
+        print(
+            f"The Average rating is: {self.presenter_manager.calc_avg():.2f}")
         print(f"The Mean rating is: {self.presenter_manager.calc_mean()}")
         print("\nHighest Rated Movies:")
         for movies in highest_rated_movies:
@@ -149,7 +154,8 @@ class MovieAppTerminalUI(BaseUI):
     @utilities.menu_option
     def search(self):
         """Prompts the user to search for a movie title and displays the results"""
-        movie_to_search = input(Fore.LIGHTGREEN_EX + "Please type what movie your searching for? \n >>> ").strip().lower()
+        movie_to_search = input(
+            Fore.LIGHTGREEN_EX + "Please type what movie your searching for? \n >>> ").strip().lower()
 
         search_results = (self.presenter_manager.search_movie(movie_to_search))
 
@@ -162,7 +168,8 @@ class MovieAppTerminalUI(BaseUI):
                 print(
                     f"{Fore.YELLOW}{title}{Fore.RESET} - Released in {Fore.LIGHTGREEN_EX}{year}{Fore.RESET} with a rating of {Fore.LIGHTGREEN_EX}{rating}{Fore.RESET}")
         else:
-            print(Fore.RED + "No matches found for your search. Please try again with a different title.")
+            print(
+                Fore.RED + "No matches found for your search. Please try again with a different title.")
 
     @utilities.menu_option
     def display_sorted(self):
@@ -176,7 +183,8 @@ class MovieAppTerminalUI(BaseUI):
     @utilities.menu_option
     def create_histogram(self):
         """Prompts the user for a filename and saves a histogram of movie ratings."""
-        filename = input("Please enter a file name to save the histogram.\n>>> ").strip()
+        filename = input(
+            "Please enter a file name to save the histogram.\n>>> ").strip()
         if not filename:
             filename = "movies_histogram.png"
         elif not filename.endswith(".png"):
@@ -197,7 +205,8 @@ class MovieAppTerminalUI(BaseUI):
                 print(
                     f"{Fore.YELLOW}{movie}{Fore.RESET}: Rating: {Fore.YELLOW}{details['rating']}{Fore.RESET}, Year: {Fore.YELLOW}{details['year']}")
         elif user_input == "N":
-            earliest_first = self.presenter_manager.sort_chronologically_earliest_first(latest_first=False)
+            earliest_first = self.presenter_manager.sort_chronologically_earliest_first(
+                latest_first=False)
             # sort earliest to latest
             print(Fore.CYAN + "Movies sorted by rating:")
             for movie, details in earliest_first.items():
@@ -210,16 +219,21 @@ class MovieAppTerminalUI(BaseUI):
     def filter(self):
         """Prompts the user for a minimum rating, start year and end year.
         Displays filtered movies based on these inputs"""
-        min_rating = input("Enter minimum rating (leave blank for no minimum rating)\n>>> ").strip()
-        start_year = input("Enter start year (leave blank for no start year)\n>>> ").strip()
-        end_year = input("Enter end year (leave blank for no start year)\n>>> ").strip()
+        min_rating = input(
+            "Enter minimum rating (leave blank for no minimum rating)\n>>> ").strip()
+        start_year = input(
+            "Enter start year (leave blank for no start year)\n>>> ").strip()
+        end_year = input(
+            "Enter end year (leave blank for no start year)\n>>> ").strip()
 
-        filtered_movies, error_message = self.presenter_manager.filter_movies(min_rating, start_year, end_year)
+        filtered_movies, error_message = self.presenter_manager.filter_movies(
+            min_rating, start_year, end_year)
         if error_message:
             print(error_message)
         else:
             for movie, year, rating, poster, note in filtered_movies:
-                print(f"{movie} was released in {year} and has an imdb rating of {rating}")
+                print(
+                    f"{movie} was released in {year} and has an imdb rating of {rating}")
                 if note:
                     print(f"Note: {note}")
 

@@ -23,7 +23,8 @@ st.sidebar.success("Select a Page above")
 if "movie_to_add" not in st.session_state:
     st.session_state["movie_to_add"] = ""
 
-my_input = st.text_input("Enter movie name here", st.session_state["movie_to_add"])
+my_input = st.text_input("Enter movie name here",
+                         st.session_state["movie_to_add"])
 add = st.button("Add ➕")
 if add:
     st.session_state["movie_to_add"] = my_input

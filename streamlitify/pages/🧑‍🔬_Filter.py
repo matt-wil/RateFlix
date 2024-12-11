@@ -23,7 +23,8 @@ start_year = st.text_input("Start year (1888 to current year)")
 end_year = st.text_input("End year (1888 to current year)")
 
 if st.button("Filter Movies"):
-    filtered_movies, error_message = st.session_state.manager.filter_movies(min_rating, start_year, end_year)
+    filtered_movies, error_message = st.session_state.manager.filter_movies(
+        min_rating, start_year, end_year)
 
     if error_message:
         st.error(error_message)

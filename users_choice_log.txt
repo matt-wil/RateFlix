@@ -1,0 +1,19 @@
+Users choice: 1
+ Timestamp: 1733411197.723685Users choice: 1
+ Timestamp: 1733411232.491895
+Users choice: 1
+ Timestamp: 1733411252.859013
+Users choice: 5
+ Timestamp: 1733411262.344593
+Users choice: 5
+ Timestamp: 1733411403.015956
+Users choice: 5
+ Timestamp: 1733411407.685716
+Users choice: 5
+ Timestamp: 1733411429.265005
+Users choice: 5
+ Timestamp: 1733411519.575071
+Users choice: 1
+ Timestamp: 1733411525.118644
+Users choice: 5
+ Timestamp: 1733411544.849381

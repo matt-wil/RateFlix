@@ -134,14 +134,16 @@ class MovieManager:
             return {"success": False, "error": "Movie is already in the library"}
 
         try:
-            movie, rating, year, poster_url, imdb_full_link, country = model.movie_api.api_extraction(movie_name)
+            movie, rating, year, poster_url, imdb_full_link, country = model.movie_api.api_extraction(
+                movie_name)
         except Exception as e:
             return {"success": False, "error": f"API Error: {str(e)}"}
 
         if not movie:
             return {"success": False, "error": "Movie not found in the database"}
 
-        self._storage.add_movie(movie_name, rating, year, poster_url, imdb_full_link, country)
+        self._storage.add_movie(movie_name, rating, year,
+                                poster_url, imdb_full_link, country)
         return {"success": True, "message": f"{movie_name} added successfully to the library"}
 
     def delete_movie(self, movie_name: str) -> dict:
@@ -309,7 +311,8 @@ class MovieManager:
         """
         movies_list = list(movies.keys())
         fuzzy_matches = process.extract(search_item, movies_list, limit=5)
-        fuzzy_results = [(title, score) for title, score in fuzzy_matches if score > 50]
+        fuzzy_results = [(title, score)
+                         for title, score in fuzzy_matches if score > 50]
 
         if fuzzy_results:
             return [

@@ -17,7 +17,8 @@ if "manager" not in st.session_state:
 st.title("Would you like to sort the movies by Earliest or Latest first?")
 earliest = st.button("Earliest")
 latest = st.button("Latest")
-earliest_dict = st.session_state.manager.sort_chronologically(latest_first=False)
+earliest_dict = st.session_state.manager.sort_chronologically(
+    latest_first=False)
 latest_dict = st.session_state.manager.sort_chronologically()
 if earliest:
     for movie, details in earliest_dict.items():

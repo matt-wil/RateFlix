@@ -24,6 +24,7 @@ class StorageJson(IStorage):
             writes/saves the movies dictionary back to the movies.json file.
 
     """
+
     def __init__(self, file_path=join("model", "movies.json")):
         """Initialise the JSON file with the correct filepath"""
         self.file_path = file_path

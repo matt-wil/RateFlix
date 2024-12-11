@@ -23,7 +23,8 @@ if movie_title:
     if movie_title in movies.keys():
         note = st.text_input("Note")
         if note:
-            result_dict = st.session_state.manager.update_movie(movie_title, note)
+            result_dict = st.session_state.manager.update_movie(
+                movie_title, note)
             if result_dict.get("success"):
                 st.write(f"{result_dict.get('message')}")
             else:

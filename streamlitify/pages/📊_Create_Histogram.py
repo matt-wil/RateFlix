@@ -28,7 +28,8 @@ def create_histogram():
         if not os.path.exists(histogram_folder):
             os.makedirs(histogram_folder)
 
-        st.session_state.manager.create_histogram(filename=os.path.join(histogram_folder, filename))
+        st.session_state.manager.create_histogram(
+            filename=os.path.join(histogram_folder, filename))
         st.success(f"Histogram saved as {filename}.png")
         time.sleep(1)
 

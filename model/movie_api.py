@@ -33,12 +33,11 @@ def api_extraction(title, api=api_key, url=OMDb_url, search_type="&t="):
         country = movie_info["Country"]
         return movie, rating, year, poster_url, imdb_full_link, country
     except HTTPError as e:
-        print(f"HTTP error occurred: {e} - Status Code: {response.status_code}")
+        print(
+            f"HTTP error occurred: {e} - Status Code: {response.status_code}")
     except ConnectionError as e:
         print(f"Connection Error: unable to connect to API {e}")
     except Timeout:
         print(f"Error request has timed out")
     except RequestException as e:
         print(f"Ann error occurred: {e}")
-
-

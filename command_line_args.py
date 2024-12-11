@@ -11,7 +11,8 @@ def determine_storage_type(file_path: str) -> str:
     elif extension == ".csv":
         return "csv"
     else:
-        raise ValueError("Unsupported file type. At this time we only support .json and .csv files.")
+        raise ValueError(
+            "Unsupported file type. At this time we only support .json and .csv files.")
 
 
 def determine_ui_type():
