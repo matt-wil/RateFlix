@@ -2,11 +2,7 @@ import argparse
 from model.storage_json import StorageJson
 from model.storage_csv import StorageCSV
 import command_line_args
-from old_app.movie_crud import MovieCrud
 from presenter.movie_manager import MovieManager
-from old_app.movie_search import MovieSearch
-from old_app.movie_stats import MovieStats
-from old_app.movie_website_generator import WebsiteGenerator
 from view.movieTerminal import MovieAppTerminalUI
 import utilities
 
